@@ -1,0 +1,8 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+
+.fi-dev-banner {
+    @apply flex items-center content-center justify-center w-full h-10 text-white backdrop-blur print:hidden bg-primary-600;
+}
