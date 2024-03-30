@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\PageResource\Pages;
 
-use App\Filament\Concerns\EditRecord\Translatable;
 use App\Filament\Resources\PageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 
 class EditPage extends EditRecord
 {
@@ -17,12 +17,7 @@ class EditPage extends EditRecord
     {
         return [
             Actions\LocaleSwitcher::make(),
-            Actions\ViewAction::make()
-                ->label(__('filament.pages.fields.preview'))
-                ->icon('heroicon-o-eye')
-                ->openUrlInNewTab(),
             Actions\DeleteAction::make(),
-
         ];
     }
 }

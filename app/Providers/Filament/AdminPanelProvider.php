@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('1.25rem')
             ->darkModeBrandLogo(asset('svg/dark/logo-minimal.svg'))
             ->font('DM Sans', provider: GoogleFontProvider::class)
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -61,7 +62,6 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                FilamentShieldPlugin::make(),
                 SpatieLaravelTranslatablePlugin::make()->defaultLocales(['fr', 'en']),
             ])
             ->navigationGroups([

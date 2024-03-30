@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Concerns\HandlesStorageFields;
+use App\Models\Shop\Customer;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\Sluggable\HasTranslatableSlug;
@@ -17,7 +20,6 @@ class Category extends Model
 {
     use HasFactory;
     use HasSEO;
-    use HasTranslatableSlug;
     use HasTranslations;
     use HandlesStorageFields;
 
@@ -31,38 +33,18 @@ class Category extends Model
 
     protected $casts = [
         'featured_image' => 'array',
+        'title' => 'array',
+        'slug' => 'array',
     ];
 
-    public function celebrities(): BelongsToMany
+
+    public function services(): MorphToMany
     {
-        return $this->belongsToMany(Service::class, 'category_service', 'category_id', 'service_id');
+        return $this->morphedByMany(Service::class, 'categorizable');
     }
 
-    public function getSlugOptions(): SlugOptions
+    public function posts(): MorphToMany
     {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return filament()->isServing() ? 'id' : 'slug';
-    }
-
-    public function getDynamicSEOData(): SEOData
-    {
-        return new SEOData(
-            title: $this->title,
-            description: $this->excerpt,
-            image: $this->featured_image,
-        );
-    }
-
-    protected function excerpt(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => __('app.category.excerpt', ['title' => $this->title])
-        );
+        return $this->morphedByMany(Post::class, 'categorizable');
     }
 }

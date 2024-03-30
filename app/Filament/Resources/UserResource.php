@@ -4,12 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -22,6 +22,8 @@ class UserResource extends Resource
 
     protected static bool $shouldRegisterNavigation = true;
 
+    protected static ?string $navigationGroup = 'Application';
+
     public static function getNavigationLabel(): string
     {
         return __('filament.users.title');
@@ -32,10 +34,6 @@ class UserResource extends Resource
         return __('filament.users.title');
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.administration');
-    }
 
     public static function form(Form $form): Form
     {
@@ -47,19 +45,18 @@ class UserResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Placeholder::make('created_at')
-                            ->label(__('filament.users.fields.created_at'))
+                            ->label(__('filament.fields.created_at'))
                             ->content(fn(User $record): ?string => $record->created_at?->diffForHumans())
                             ->hidden(fn(?User $record) => $record === null),
                         Forms\Components\Placeholder::make('updated_at')
-                            ->label(__('filament.users.fields.updated_at'))
+                            ->label(__('filament.fields.updated_at'))
                             ->content(fn(User $record): ?string => $record->updated_at?->diffForHumans())
                             ->hidden(fn(?User $record) => $record === null),
                         Forms\Components\Select::make('roles')
-                            ->label(__('filament.users.fields.roles'))
+                            ->label(__('filament.fields.roles'))
                             ->relationship('roles', 'name')
                             ->multiple()
                             ->preload()
-                            ->hidden(fn(?User $record): bool => !$record->hasRole(config('app.admin_role')))
                             ->required(),
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -72,12 +69,17 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('filament.users.fields.name')),
+                    ->label(__('filament.fields.name')),
                 Tables\Columns\TextColumn::make('email')
-                    ->label(__('filament.users.fields.email')),
-                Tables\Columns\TextColumn::make('roles.name')
-                    ->label(__('filament.users.fields.roles'))
-                    ->badge(),
+                    ->label(__('filament.fields.email')),
+                TextColumn::make('created_at')
+                    ->label(__('filament.fields.created_at'))
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('updated_at')
+                    ->label(__('filament.fields.updated_at'))
+                    ->date()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -109,10 +111,10 @@ class UserResource extends Resource
                         ->schema(
                             [
                                 Forms\Components\TextInput::make('name')
-                                    ->label(__('filament.users.fields.name'))
+                                    ->label(__('filament.fields.name'))
                                     ->required(),
                                 Forms\Components\TextInput::make('email')
-                                    ->label(__('filament.users.fields.email'))
+                                    ->label(__('filament.fields.email'))
                                     ->email()
                                     ->unique(ignoreRecord: true)
                                     ->required()

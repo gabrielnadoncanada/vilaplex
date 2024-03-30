@@ -2,24 +2,29 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\DisplayStatus;
 use App\Filament\Forms\Components\SeoExtended;
-use App\Filament\Resources\ServiceResource\Pages;
-use App\Models\Page;
+use App\Filament\Resources\PostResource\Pages\EditPost;
+use App\Filament\Resources\ServiceResource\Pages\CreateService;
+use App\Filament\Resources\ServiceResource\Pages\EditService;
+use App\Filament\Resources\ServiceResource\Pages\ListServices;
+use App\Filament\Resources\ServiceResource\Pages\ManageCategories;
+use App\Filament\Resources\ServiceResource\RelationManagers\CategoriesRelationManager;
 use App\Models\Service;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Concerns\Translatable;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
@@ -28,7 +33,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-
+use Illuminate\Support\Str;
 
 class ServiceResource extends Resource
 {
@@ -37,6 +42,9 @@ class ServiceResource extends Resource
     protected static ?string $model = Service::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function getNavigationLabel(): string
     {
@@ -48,11 +56,6 @@ class ServiceResource extends Resource
         return __('filament.services.title');
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.general');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -62,32 +65,17 @@ class ServiceResource extends Resource
                     ->columnSpan(['lg' => 2]),
                 Group::make()
                     ->schema([
-                        Section::make(__('filament.categories.fields.featured_image'))
+                        Section::make()
                             ->schema([
-                                FileUpload::make('featured_image')
-                                    ->image()
-                                    ->directory('services/featured_images')
-                                    ->required()
-                                    ->label(__('filament.categories.fields.featured_image')),
-                            ]),
-                        Section::make('Associations')
-                            ->schema([
-                                Select::make('categories')
-                                    ->relationship('categories', 'title')
-                                    ->getOptionLabelFromRecordUsing(fn($record) => $record->title)
-                                    ->preload()
-                                    ->multiple()
-                                    ->createOptionForm([
-                                        TextInput::make('title')
-                                            ->label(__('filament.categories.fields.title'))
-                                            ->required()
-                                            ->maxValue(50),
-                                    ])
+                                Select::make('status')
+                                    ->label(__('filament.fields.status'))
+                                    ->options(DisplayStatus::class)
+                                    ->default(DisplayStatus::PUBLISHED)
                                     ->required(),
                             ]),
+
                     ])
                     ->columnSpan(['lg' => 1]),
-
             ])
             ->columns(3);
     }
@@ -98,17 +86,17 @@ class ServiceResource extends Resource
             ->columns([
                 ImageColumn::make('featured_image')
                     ->width('100px')
-                    ->label(__('filament.services.fields.featured_image')),
+                    ->label(__('filament.fields.featured_image')),
                 TextColumn::make('title')
-                    ->label(__('filament.services.fields.title')),
+                    ->label(__('filament.fields.title')),
                 TextColumn::make('slug')
-                    ->label(__('filament.services.fields.slug')),
+                    ->label(__('filament.fields.slug')),
                 TextColumn::make('created_at')
-                    ->label(__('filament.services.fields.created_at'))
+                    ->label(__('filament.fields.created_at'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('updated_at')
-                    ->label(__('filament.services.fields.updated_at'))
+                    ->label(__('filament.fields.updated_at'))
                     ->date()
                     ->sortable(),
             ])
@@ -132,126 +120,62 @@ class ServiceResource extends Resource
     {
         return [
             Tabs::make('Tabs')
+                ->columnSpanFull()
                 ->tabs([
                     Tab::make('General')
                         ->schema([
                             TextInput::make('title')
-                                ->label(__('filament.services.fields.title'))
+                                ->label(__('filament.fields.title'))
                                 ->required()
                                 ->live(onBlur: true)
-                            ->columnSpanFull(),
+                                ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                    $currentSlug = $get('slug');
+
+                                    if (empty($currentSlug)) {
+                                        $set('slug', Str::slug($state));
+                                    }
+                                })
+                            ,
                             TextInput::make('slug')
                                 ->required()
-                                ->prefix(fn($livewire) => ENV('APP_URL') . '/' . $livewire->activeLocale . '/')
-                                ->label(__('filament.services.fields.slug'))
-                                ->hidden(fn(?Service $record) => $record === null)
-                                ->columnSpanFull(),
-                            Fieldset::make(__('filament.services.fields.content'))
-                                ->schema(static::getBuilderFieldsSchema())
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state)))
+                                ->unique(Service::class, 'slug', ignoreRecord: true)
+                                ->label(__('filament.fields.slug'))
+                            ,
+                            TextInput::make('excerpt')
+                                ->label(__('filament.fields.excerpt'))
+                                ->required()
+                                ->columnSpanFull()
+                                ->maxLength(150),
+                            FileUpload::make('featured_image')
+                                ->image()
+                                ->directory('services/featured_images')
+                                ->required()
+                                ->columnSpanFull()
+                                ->label(__('filament.fields.featured_image')),
                         ])->columns(),
-                    Tab::make('SEO')
-                        ->schema([
-                            SeoExtended::make()
-                                ->columns(3)
-                        ]),
+                    Tab::make(__('filament.fields.content'))
+                        ->schema(DynamicConfigResource::getBuilderFieldsSchema()),
                 ]),
-
-        ];
-    }
-
-    public static function getBuilderFieldsSchema(): array
-    {
-        return [
-            Builder::make('content')
-                ->label('')
-                ->columnSpanFull()
-                ->addActionLabel(__('filament.services.fields.add_content'))
-                ->blocks([
-                    Block::make('heading')
-                        ->schema([
-                            Group::make()
-                                ->schema([
-                                    TextInput::make('content')
-                                        ->label('Heading')
-                                        ->required(),
-                                    Select::make('alignment')
-                                        ->options([
-                                            'left' => 'Left',
-                                            'center' => 'Center',
-                                            'right' => 'Right',
-                                        ])
-                                        ->default('left')
-                                        ->required(),
-                                    Select::make('level')
-                                        ->options([
-                                            'h1' => 'Heading 1',
-                                            'h2' => 'Heading 2',
-                                            'h3' => 'Heading 3',
-                                            'h4' => 'Heading 4',
-                                            'h5' => 'Heading 5',
-                                            'h6' => 'Heading 6',
-                                        ])
-                                        ->required(),
-                                ])
-                                ->columns(3)
-
-                        ])
-                    ,
-                    Block::make('paragraph')
-                        ->schema([
-                            RichEditor::make('content')
-                                ->label('Paragraph')
-                                ->required(),
-                        ]),
-                    Block::make('hero')
-                        ->schema([
-                            RichEditor::make('content')
-                                ->label('Paragraph')
-                                ->required(),
-                            TextInput::make('link')
-                                ->label('Lien du bouton')
-                                ->live()
-                                ->required(),
-
-
-                        ]),
-                    Block::make('accordions')
-                        ->schema([
-                            Repeater::make('accordion')
-                                ->label('Accordion')
-                                ->collapsible()
-                                ->reorderableWithButtons()
-                                ->itemLabel(fn($state) => $state['title'] ?? 'Accordion')
-                                ->collapsed()
-                                ->schema([
-                                    TextInput::make('title')
-                                        ->label('Title')
-                                        ->live()
-                                        ->required(),
-                                    RichEditor::make('content')
-                                        ->label('Content')
-                                        ->required(),
-                                ])
-                                ->required(),
-                        ]),
-                ])
         ];
     }
 
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+//    public static function getRelations(): array
+//    {
+//        return [
+//            CategoriesRelationManager::class,
+//        ];
+//    }
+
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListServices::route('/'),
-            'create' => Pages\CreateService::route('/create'),
-            'edit' => Pages\EditService::route('/{record}/edit'),
+            'index' => ListServices::route('/'),
+            'create' => CreateService::route('/create'),
+            'edit' => EditService::route('/{record}/edit'),
         ];
     }
 }

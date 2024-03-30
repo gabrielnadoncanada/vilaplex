@@ -2,15 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages\CreateCategory;
-use App\Filament\Resources\CategoryResource\Pages\EditCategory;
 use App\Filament\Resources\CategoryResource\Pages\ListCategories;
 use App\Models\Category;
-use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
@@ -20,28 +30,15 @@ class CategoryResource extends Resource
 
     protected static ?string $model = Category::class;
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?int $navigationSort = 3;
-
-    protected static ?string $label = 'Catégorie';
-
-    protected static ?string $title = 'Catégorie';
-
-    protected static ?string $pluralLabel = 'catégories';
-
-    protected static ?string $pluralModelLabel = 'catégories';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationLabel(): string
     {
         return __('filament.categories.title');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.general');
     }
 
     public static function getLabel(): ?string
@@ -52,41 +49,24 @@ class CategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Section::make()
-                    ->schema(static::getFormSchema())
-                    ->columnSpan(['lg' => 2]),
-                Forms\Components\Group::make()
-                    ->schema([
-                        Forms\Components\Section::make(__('filament.categories.fields.featured_image'))
-                            ->schema([
-                                Forms\Components\FileUpload::make('featured_image')
-                                    ->image()
-                                    ->directory('categories/featured_images')
-                                    ->required()
-                                    ->label(__('filament.categories.fields.featured_image')),
-                            ]),
-                    ])
-                    ->columnSpan(['lg' => 1]),
-            ])
-            ->columns(3);
+            ->schema(self::getFormFieldSchema());
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('featured_image')
+                ImageColumn::make('featured_image')
                     ->width('100px')
-                    ->label(__('filament.categories.fields.featured_image')),
-                Tables\Columns\TextColumn::make('title')
-                    ->label(__('filament.categories.fields.title')),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.categories.fields.created_at'))
+                    ->label(__('filament.fields.featured_image')),
+                TextColumn::make('title')
+                    ->label(__('filament.fields.title')),
+                TextColumn::make('created_at')
+                    ->label(__('filament.fields.created_at'))
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.categories.fields.updated_at'))
+                TextColumn::make('updated_at')
+                    ->label(__('filament.fields.updated_at'))
                     ->date()
                     ->sortable(),
             ])
@@ -94,35 +74,51 @@ class CategoryResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
+    }
+
+
+    public static function getFormFieldSchema(): array
+    {
+        return [
+            Grid::make()
+                ->schema([
+                    TextInput::make('title')
+                        ->label(__('filament.fields.title'))
+                        ->required()
+                        ->maxValue(50)
+                        ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                            $currentSlug = $get('slug');
+                            if (empty($currentSlug)) {
+                                $set('slug', Str::slug($state));
+                            }
+                        })
+                        ->live(onBlur: true),
+                    TextInput::make('slug')
+                        ->required()
+                        ->live(onBlur: true)
+                        ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state)))
+                        ->unique(Category::class, 'slug', ignoreRecord: true)
+                        ->label(__('filament.fields.slug')),
+                    FileUpload::make('featured_image')
+                        ->image()
+                        ->directory('categories/featured_images')
+                        ->required()
+                        ->columnSpanFull()
+                        ->label(__('filament.fields.featured_image')),
+                ]),
+        ];
     }
 
     public static function getPages(): array
     {
         return [
             'index' => ListCategories::route('/'),
-            'create' => CreateCategory::route('/create'),
-            'edit' => EditCategory::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getFormSchema(): array
-    {
-        return [
-            Forms\Components\Grid::make()
-                ->schema([
-                    Forms\Components\TextInput::make('title')
-                        ->label(__('filament.categories.fields.title'))
-                        ->required()
-                        ->maxValue(50),
-                    Forms\Components\TextInput::make('slug')
-                        ->disabled()
-                ]),
         ];
     }
 }

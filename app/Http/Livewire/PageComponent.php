@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 
-use App\Enums\PageStatus;
+use App\Enums\DisplayStatus;
 use App\Models\Page;
 use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
@@ -15,7 +15,7 @@ class PageComponent extends Component
 
     public function mount()
     {
-        if ($this->record->status === PageStatus::DRAFT) {
+        if ($this->record->status === DisplayStatus::DRAFT) {
             return Redirect::route('home');
         }
     }

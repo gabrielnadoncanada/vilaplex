@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Livewire\ContactComponent;
+use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\PostComponent;
+use App\Http\Livewire\ServiceComponent;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Contact;
-use App\Http\Livewire\Home;
 use App\Http\Livewire\PageComponent;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -20,12 +22,13 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+    'middleware' => ['localizationRedirect'],
 ], function () {
-    Route::get(LaravelLocalization::transRoute('routes.home'), \App\Http\Livewire\HomeComponent::class)->name('home');
-    Route::get(LaravelLocalization::transRoute('routes.contact'), \App\Http\Livewire\ContactComponent::class)->name('contact');
-    Route::get(LaravelLocalization::transRoute('routes.page'), PageComponent::class)->name('page.view');
-    Route::get(LaravelLocalization::transRoute('routes.service.show'), \App\Http\Livewire\ServiceComponent::class)->name('service.show');
+    Route::get(LaravelLocalization::transRoute('routes.home'), HomeComponent::class)->name('home');
+    Route::get(LaravelLocalization::transRoute('routes.contact'), ContactComponent::class)->name('contact');
+    Route::get(LaravelLocalization::transRoute('routes.page'), PageComponent::class)->name('page');
+    Route::get(LaravelLocalization::transRoute('routes.service'), ServiceComponent::class)->name('service');
+    Route::get(LaravelLocalization::transRoute('routes.post'), PostComponent::class)->name('post');
 
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/livewire/update', $handle);

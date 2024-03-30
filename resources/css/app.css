@@ -1,1 +1,8 @@
 @import "style-light.css";
+
+.max-w-350px {
+    max-width: 350px;
+}
+.max-w-450px {
+    max-width: 450px;
+}

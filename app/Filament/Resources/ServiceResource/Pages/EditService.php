@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\ServiceResource\Pages;
 
-use App\Filament\Concerns\EditRecord\Translatable;
 use App\Filament\Resources\ServiceResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 
 class EditService extends EditRecord
 {
@@ -21,4 +21,8 @@ class EditService extends EditRecord
         ];
     }
 
+    public function hasCombinedRelationManagerTabsWithContent(): bool
+    {
+        return true;
+    }
 }

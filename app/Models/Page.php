@@ -2,40 +2,35 @@
 
 namespace App\Models;
 
-use App\Enums\PageStatus;
+use App\Enums\DisplayStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
-use Spatie\Sluggable\HasTranslatableSlug;
-use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
 class Page extends Model
 {
     use HasFactory;
     use HasTranslations;
-    use HasTranslatableSlug;
     use HasSEO;
 
-    public $translatable = ['title', 'slug', 'content'];
+    public $translatable = ['title', 'slug', 'content', 'excerpt'];
 
-    protected $guarded = [
-    ];
+    protected $guarded = [];
 
     protected $casts = [
-        'status' => PageStatus::class,
+        'status' => DisplayStatus::class,
+        'featured_image' => 'array',
     ];
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom(['title'])
-            ->saveSlugsTo('slug');
-    }
+
     public function getRouteKeyName(): string
     {
-        return filament()->isServing() ? 'id' : 'slug';
+        return filament()->isServing() ? 'id' : 'slug->' . app()->getLocale();
     }
 
-
+    public function scopePublished($query)
+    {
+        return $query->where('status', '!=', \App\Enums\DisplayStatus::DRAFT);
+    }
 }

@@ -5,7 +5,11 @@ namespace App\Providers;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\AssociateAction;
+use Filament\Tables\Actions\DetachAction;
+use Filament\Tables\Actions\DetachAction as TableDetachAction;
 use Filament\Tables\Actions\DeleteAction as TableDeleteAction;
 use Filament\Tables\Actions\EditAction as TableEditAction;
 use Filament\Tables\Actions\ReplicateAction as TableReplicateAction;
@@ -14,7 +18,6 @@ use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FilamentShield;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -26,9 +29,9 @@ class FilamentServiceProvider extends ServiceProvider
         $this->configureTable();
         $this->configureColumns();
         $this->configureForm();
-        $this->configureFilamentShield();
-        $this->registerRenderHook();
-        $this->configureFileUpload();
+//        $this->configureFilamentShield();
+//        $this->registerRenderHook();
+//        $this->configureFileUpload();
     }
 
     protected function configureTable(): void
@@ -42,24 +45,31 @@ class FilamentServiceProvider extends ServiceProvider
                 )->filtersFormWidth('2xl')
                 ->paginationPageOptions([5, 10, 25, 50])
         );
+
+
         TableEditAction::configureUsing(function (TableEditAction $action) {
+            $action->tooltip($action->getLabel());
             $action->label('');
-            $action->tooltip('Modifier');
+        }, isImportant: true);
+
+        TableDetachAction::configureUsing(function (TableDetachAction $action) {
+            $action->tooltip($action->getLabel());
+            $action->label('');
         }, isImportant: true);
 
         TableDeleteAction::configureUsing(function (TableDeleteAction $action) {
+            $action->tooltip($action->getLabel());
             $action->label('');
-            $action->tooltip('Supprimer');
         }, isImportant: true);
 
         TableViewAction::configureUsing(function (TableViewAction $action) {
+            $action->tooltip($action->getLabel());
             $action->label('');
-            $action->tooltip('Voir');
         }, isImportant: true);
 
         TableReplicateAction::configureUsing(function (TableReplicateAction $action) {
+            $action->tooltip($action->getLabel());
             $action->label('');
-            $action->tooltip('Dupliquer');
         }, isImportant: true);
     }
 
@@ -76,7 +86,7 @@ class FilamentServiceProvider extends ServiceProvider
         });
 
         ImageColumn::configureUsing(function (ImageColumn $column): void {
-            $column->disk(config('filesystems.default'))->visibility('private');
+//            $column->disk(config('filesystems.default'))->visibility('private');
         }, isImportant: true);
     }
 

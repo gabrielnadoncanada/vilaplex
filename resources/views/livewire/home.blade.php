@@ -1,21 +1,18 @@
 <div class="mry-content-frame" id="scroll">
     <canvas class="mry-dots"></canvas>
-
     <div class="swiper-container mry-main-slider">
         <div class="swiper-wrapper">
-            @foreach (App\Models\Service::all() as $index => $service)
-
+            @foreach (App\Models\Service::published()->get() as $index => $service)
                 <div class="swiper-slide">
-
-                    <!-- project -->
                     <div class="mry-project-slider-item">
-                        <div class="mry-project-frame">
+                        <div class="mry-project-frame mry-project-half">
                             <div class="mry-cover-frame">
                                 <img class="mry-project-cover mry-position-right"
-                                     src="{{ Storage::temporaryUrl($service->featured_image, now()->addMinutes(5))}}"
+                                     src="{{ Storage::url($service->featured_image)}}"
                                      alt="Project" data-swiper-parallax="500"
                                      data-swiper-parallax-scale="1.4">
-                                <div class="mry-cover-overlay mry-gradient-overlay"></div>
+                                <div class="mry-cover-overlay"></div>
+                                <div class="mry-loading-curtain"></div>
                             </div>
                             <div class="mry-main-title-frame">
                                 <div class="container">
@@ -30,27 +27,26 @@
                                             $part1 = substr($title, 0, $lastSpaceBefore75Percent);
                                             $part2 = substr($title, $lastSpaceBefore75Percent);
                                         @endphp
-
-                                        <div class="mry-subtitle mry-mb-20">{{$service->categories->first()->title}}</div>
-                                        <h1 class="mry-mb-30">{{ trim($part1) }}<br><span class="mry-border-text">{{ trim($part2) }}</span><span class="mry-animation-el"></span></h1>
-                                        <div class="mry-text mry-mb-30">Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing elit.<br>Adipisci distinctio iure, rerum non fugit.
+                                        <div
+                                            class="mry-subtitle mry-mb-20">{{count($service->categories) ? $service->categories->first()->title : ''}}</div>
+                                        <h1 class="mry-mb-30">{{ trim($part1) }}<br><span
+                                                class="mry-border-text">{{ trim($part2) }}</span><span
+                                                class="mry-animation-el"></span></h1>
+                                        <div class="mry-text mry-mb-30 max-w-350px">{{$service->excerpt}}
                                         </div>
-                                        <a class="mry-btn mry-default-link mry-anima-link" href="project.html">Open
-                                            Case</a>
+                                        <a class="mry-btn mry-default-link mry-anima-link"
+                                           href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.service.show', array('service' => $service->slug))}}">
+                                            {{__('app.home.hero.learn_more')}}</a>
                                         <a class="mry-btn-text mry-default-link mry-anima-link"
-                                           href="portfolio-grid-1.html">All Projects</a>
+                                           href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.contact')}}">
+                                            {{__('app.home.hero.contact_us')}}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- project end -->
-
                 </div>
             @endforeach
-
-
         </div>
     </div>
 

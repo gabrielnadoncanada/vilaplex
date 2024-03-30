@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\ServiceResource\Pages;
 
-use App\Filament\Concerns\CreateRecord\Translatable;
 use App\Filament\Resources\ServiceResource;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\CreateRecord\Concerns\Translatable;
 
 class CreateService extends CreateRecord
 {

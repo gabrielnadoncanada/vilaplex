@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use App\Enums\PageStatus;
+use App\Enums\DisplayStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\Sluggable\HasTranslatableSlug;
@@ -16,10 +19,8 @@ class Service extends Model
 {
     use HasFactory;
     use HasTranslations;
-    use HasTranslatableSlug;
-    use HasSEO;
 
-    public $translatable = ['title', 'slug', 'content'];
+    public $translatable = ['title', 'slug', 'content', 'excerpt'];
 
     protected array $storage_fields = [
         'featured_image',
@@ -31,28 +32,18 @@ class Service extends Model
         'featured_image' => 'array',
     ];
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom(['title'])
-            ->saveSlugsTo('slug');
-    }
     public function getRouteKeyName(): string
     {
-        return filament()->isServing() ? 'id' : 'slug';
+        return filament()->isServing() ? 'id' : 'slug->' . app()->getLocale();
     }
 
-    public function getDynamicSEOData(): SEOData
+    public function categories(): MorphToMany
     {
-        return new SEOData(
-            title: $this->title,
-            description: $this->excerpt,
-            image: $this->featured_image,
-        );
+        return $this->morphToMany(Category::class, 'categorizable', 'categorizables');
     }
 
-    public function categories(): BelongsToMany
+    public function scopePublished($query)
     {
-        return $this->belongsToMany(Category::class, 'category_service', 'service_id', 'category_id')->withTimestamps();
+        return $query->where('status', '!=', \App\Enums\DisplayStatus::DRAFT);
     }
 }

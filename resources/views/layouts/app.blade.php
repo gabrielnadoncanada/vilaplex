@@ -41,9 +41,8 @@
             </div>
         </div>
     </div>
-    <!-- cursor end -->
-    <x-menu></x-menu>
-
+    <x-sections.top-panel/>
+    <x-sections.menu/>
     <div class="transition-fade">
         {{ $slot }}
     </div>
