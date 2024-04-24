@@ -32,6 +32,10 @@ return [
         'int' => 'Nombre',
         'builder' => 'Constructeur',
         'image' => 'Image',
+        'is_home' => 'Page d\'accueil',
+    ],
+    'actions' => [
+        'preview' => 'Aperçu',
     ],
     'displayStatus' => [
         'draft' => 'Brouillon',

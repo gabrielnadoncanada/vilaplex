@@ -23,6 +23,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -70,27 +71,8 @@ class PageResource extends Resource
                 Group::make()
                     ->schema(static::getFormFieldsSchema())
                     ->columnSpan(['lg' => 2]),
-                Group::make()
-                    ->schema([
-                        Section::make()
-                            ->schema([
-                                Select::make('status')
-                                    ->label(__('filament.fields.status'))
-                                    ->options(DisplayStatus::class)
-                                    ->default(DisplayStatus::PUBLISHED)
-                                    ->required(),
 
-                                Select::make('template')
-                                    ->label(__('filament.fields.template'))
-                                    ->options(static::getTemplateOptions())
-                                    ->default('Default')
-                                    ->required(),
-                            ]),
-
-                    ])
-                    ->columnSpan(['lg' => 1]),
-            ])
-            ->columns(3);
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -143,24 +125,59 @@ class PageResource extends Resource
                                 ->live(onBlur: true)
                                 ->afterStateUpdated(function ($state, Set $set, Get $get) {
                                     $currentSlug = $get('slug');
-
                                     if (empty($currentSlug)) {
                                         $set('slug', Str::slug($state));
                                     }
                                 })
+                                ->columnSpan(function ($get) {
+                                    if ($get('is_home')) {
+                                        return '2';
+                                    }
+                                    return '1';
+                                })
                             ,
                             TextInput::make('slug')
                                 ->required()
+                                ->hidden(function ($get) {
+                                    if ($get('is_home')) {
+                                        return true;
+                                    }
+                                    return false;
+                                })
                                 ->live(onBlur: true)
                                 ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state)))
                                 ->unique(Page::class, 'slug', ignoreRecord: true)
                                 ->label(__('filament.fields.slug'))
                             ,
+                            Select::make('status')
+                                ->label(__('filament.fields.status'))
+                                ->options(DisplayStatus::class)
+                                ->default(DisplayStatus::PUBLISHED)
+                                ->required(),
+                            Select::make('template')
+                                ->label(__('filament.fields.template'))
+                                ->options(static::getTemplateOptions())
+                                ->default('Default')
+                                ->required(),
+                            Toggle::make('is_home')
+                                ->live()
+                                ->hidden(function ($record) {
+                                    $modelClass = static::$model;
+                                    if ($record) {
+                                        return $modelClass::where('is_home', 'true')->where('id', '!=', $record->id)->exists();
+                                    } else {
+                                        return $modelClass::where('is_home', 'true')->exists();
+                                    }
+                                })
+                                ->unique(Page::class, 'is_home', ignoreRecord: true)
+                                ->label(__('filament.fields.is_home'))
+                                ->default(false),
                             TextInput::make('excerpt')
                                 ->label(__('filament.fields.excerpt'))
                                 ->required()
                                 ->columnSpanFull()
                                 ->maxLength(150),
+
                             FileUpload::make('featured_image')
                                 ->image()
                                 ->directory('services/featured_images')
@@ -202,6 +219,7 @@ class PageResource extends Resource
             'index' => Pages\ListPages::route('/'),
             'create' => Pages\CreatePage::route('/create'),
             'edit' => Pages\EditPage::route('/{record}/edit'),
+            'view' => Pages\PreviewPage::route('/{record}/preview'),
         ];
     }
 }

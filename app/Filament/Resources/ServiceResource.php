@@ -59,26 +59,67 @@ class ServiceResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Group::make()
-                    ->schema(static::getFormFieldsSchema())
-                    ->columnSpan(['lg' => 2]),
-                Group::make()
-                    ->schema([
-                        Section::make()
-                            ->schema([
-                                Select::make('status')
-                                    ->label(__('filament.fields.status'))
-                                    ->options(DisplayStatus::class)
-                                    ->default(DisplayStatus::PUBLISHED)
-                                    ->required(),
-                            ]),
-
-                    ])
-                    ->columnSpan(['lg' => 1]),
-            ])
-            ->columns(3);
+            ->schema(static::getFormFieldsSchema());
     }
+
+
+
+    public static function getFormFieldsSchema(): array
+    {
+        return [
+            Tabs::make('Tabs')
+                ->columnSpanFull()
+                ->tabs([
+                    Tab::make('General')
+                        ->schema([
+                            TextInput::make('title')
+                                ->label(__('filament.fields.title'))
+                                ->required()
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function ($state, Set $set, Get $get) {
+                                    $currentSlug = $get('slug');
+
+                                    if (empty($currentSlug)) {
+                                        $set('slug', Str::slug($state));
+                                    }
+                                }),
+                            TextInput::make('slug')
+                                ->required()
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state)))
+                                ->unique(Service::class, 'slug', ignoreRecord: true)
+                                ->label(__('filament.fields.slug'))
+                            ,
+                            Select::make('status')
+                                ->label(__('filament.fields.status'))
+                                ->options(DisplayStatus::class)
+                                ->default(DisplayStatus::PUBLISHED)
+                                ->required(),
+                            Textarea::make('excerpt')
+                                ->label(__('filament.fields.excerpt'))
+                                ->required()
+                                ->columnSpanFull()
+                                ->maxLength(150),
+                            FileUpload::make('featured_image')
+                                ->image()
+                                ->directory('services/featured_images')
+                                ->required()
+                                ->columnSpanFull()
+                                ->label(__('filament.fields.featured_image')),
+                        ])->columns(3),
+                    Tab::make(__('filament.fields.content'))
+                        ->schema(DynamicConfigResource::getBuilderFieldsSchema()),
+                ]),
+        ];
+    }
+
+
+//    public static function getRelations(): array
+//    {
+//        return [
+//            CategoriesRelationManager::class,
+//        ];
+//    }
 
     public static function table(Table $table): Table
     {
@@ -115,61 +156,6 @@ class ServiceResource extends Resource
                 ]),
             ]);
     }
-
-    public static function getFormFieldsSchema(): array
-    {
-        return [
-            Tabs::make('Tabs')
-                ->columnSpanFull()
-                ->tabs([
-                    Tab::make('General')
-                        ->schema([
-                            TextInput::make('title')
-                                ->label(__('filament.fields.title'))
-                                ->required()
-                                ->live(onBlur: true)
-                                ->afterStateUpdated(function ($state, Set $set, Get $get) {
-                                    $currentSlug = $get('slug');
-
-                                    if (empty($currentSlug)) {
-                                        $set('slug', Str::slug($state));
-                                    }
-                                })
-                            ,
-                            TextInput::make('slug')
-                                ->required()
-                                ->live(onBlur: true)
-                                ->afterStateUpdated(fn($state, Set $set) => $set('slug', Str::slug($state)))
-                                ->unique(Service::class, 'slug', ignoreRecord: true)
-                                ->label(__('filament.fields.slug'))
-                            ,
-                            TextInput::make('excerpt')
-                                ->label(__('filament.fields.excerpt'))
-                                ->required()
-                                ->columnSpanFull()
-                                ->maxLength(150),
-                            FileUpload::make('featured_image')
-                                ->image()
-                                ->directory('services/featured_images')
-                                ->required()
-                                ->columnSpanFull()
-                                ->label(__('filament.fields.featured_image')),
-                        ])->columns(),
-                    Tab::make(__('filament.fields.content'))
-                        ->schema(DynamicConfigResource::getBuilderFieldsSchema()),
-                ]),
-        ];
-    }
-
-
-//    public static function getRelations(): array
-//    {
-//        return [
-//            CategoriesRelationManager::class,
-//        ];
-//    }
-
-
     public static function getPages(): array
     {
         return [

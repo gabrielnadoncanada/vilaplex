@@ -20,6 +20,7 @@ class DynamicConfig extends Model
     public array $translatable = ['content'];
 
     const KEY = 'key';
+    const TITLE = 'title';
 
     const CONTENT = 'content';
 
@@ -33,11 +34,12 @@ class DynamicConfig extends Model
     protected function content(): Attribute
     {
         return Attribute::make(
-            get: fn(string $content) => match ($this[self::TYPE]) {
-                ConfigDataType::INT => intval($content),
-                ConfigDataType::IMAGE => Storage::url($content),
-                default => $content,
-            }
+            get: fn(string $content) => filament()->isServing() ? $content :
+                match ($this[self::TYPE]) {
+                    ConfigDataType::INT => intval($content),
+                    ConfigDataType::IMAGE => Storage::url($content),
+                    default => $content,
+                }
         );
     }
 

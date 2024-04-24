@@ -55,7 +55,7 @@
                         </div>
                         <div class="mry-mb-20">
                             <div class="mry-label mry-mb-5">Address:</div>
-                            <div class="mry-text">{{App\Models\DynamicConfig::getConfig('address')}}</div>
+                            <div class="mry-text">{{App\Models\DynamicConfig::getConfig('address_line_1')}}</div>
                         </div>
                         <div class="mry-mb-20">
                             <div class="mry-label mry-mb-5">Email:</div>

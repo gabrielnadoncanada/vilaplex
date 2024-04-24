@@ -34,10 +34,10 @@
                                                 class="mry-animation-el"></span></h1>
                                         <div class="mry-text mry-mb-30 max-w-350px">{{$service->excerpt}}
                                         </div>
+{{--                                        <a class="mry-btn mry-default-link mry-anima-link"--}}
+{{--                                           href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.service.show', array('service' => $service->slug))}}">--}}
+{{--                                            {{__('app.home.hero.learn_more')}}</a>--}}
                                         <a class="mry-btn mry-default-link mry-anima-link"
-                                           href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.service.show', array('service' => $service->slug))}}">
-                                            {{__('app.home.hero.learn_more')}}</a>
-                                        <a class="mry-btn-text mry-default-link mry-anima-link"
                                            href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.contact')}}">
                                             {{__('app.home.hero.contact_us')}}</a>
                                     </div>
@@ -71,6 +71,5 @@
                         class="fas fa-arrow-right"></i></span></div>
         </div>
     </div>
-
 </div>
 

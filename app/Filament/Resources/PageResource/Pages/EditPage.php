@@ -17,6 +17,10 @@ class EditPage extends EditRecord
     {
         return [
             Actions\LocaleSwitcher::make(),
+            Actions\ViewAction::make()
+                ->label(__('filament.actions.preview'))
+                ->icon('heroicon-o-eye')
+                ->openUrlInNewTab(),
             Actions\DeleteAction::make(),
         ];
     }

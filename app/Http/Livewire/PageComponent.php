@@ -22,6 +22,8 @@ class PageComponent extends Component
 
     public function render()
     {
-        return view('pages.templates.' . strtolower($this->record->template), ['record' => $this->record]);
+        return view('livewire.page', [
+            'record' => $this->record,
+        ]);
     }
 }

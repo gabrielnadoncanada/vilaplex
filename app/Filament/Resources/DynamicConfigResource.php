@@ -113,10 +113,11 @@ class DynamicConfigResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('key')
-                    ->label(__('filament.fields.key')),
                 TextColumn::make('title')
                     ->label(__('filament.fields.title')),
+                TextColumn::make('key')
+                    ->label(__('filament.fields.key')),
+
                 TextColumn::make('type')
                     ->label(__('filament.fields.type')),
             ])
@@ -138,7 +139,6 @@ class DynamicConfigResource extends Resource
                 ->columnSpanFull()
                 ->collapsible()
                 ->cloneable()
-                ->required()
                 ->collapsed()
                 ->addActionLabel(__('filament.fields.add_content'))
                 ->blocks(static::getBlocks())
@@ -149,13 +149,49 @@ class DynamicConfigResource extends Resource
     public static function getBlocks(): array
     {
         return [
-            Block::make('section')
-                ->schema(static::getBlockSchemaSection()),
+            Block::make('section')->schema(static::getBlockSchemaSection()),
 //            Block::make('button')->schema(static::getBlockSchemaButton()),
 //            Block::make('accordions')->schema(static::getBlockSchemaAccordions()),
 //            Block::make('hero')->schema(static::getBlockSchemaHero()),
 //            Block::make('paragraph')->schema(static::getBlockSchemaParagraph()),
-//            Block::make('heading')->schema(static::getBlockSchemaText()),
+            Block::make('text')->schema(static::getBlockSchemaText()),
+        ];
+    }
+
+    public static function getBlockSchemaText(): array
+    {
+        return [
+            Group::make()
+                ->schema([
+                    Select::make('alignment')
+                        ->options([
+                            'left' => 'Left',
+                            'center' => 'Center',
+                            'right' => 'Right',
+                        ])
+                        ->default('center')
+                        ->required(),
+                    Select::make('level')
+                        ->options([
+                            'p' => 'Paragraph',
+                            'h1' => 'H1',
+                            'h2' => 'H2',
+                            'h3' => 'H3',
+                            'h4' => 'H4',
+                            'h5' => 'H5',
+                            'h6' => 'H6',
+                        ])
+                        ->default('p')
+                        ->required(),
+                    Textarea::make('content')
+                        ->label('Contenu')
+                        ->required()
+                        ->default('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+                        ->rows(3)
+                        ->columnSpanFull(),
+                ])
+                ->columnSpanFull()
+                ->columns()
         ];
     }
 
@@ -163,16 +199,15 @@ class DynamicConfigResource extends Resource
     {
         return [
             TextInput::make('title')
-                ->label('Title')
+                ->label(__('filament.fields.title'))
                 ->required(),
-
             Section::make('content')
                 ->schema([
                     Builder::make('content')
                         ->label('')
                         ->columnSpanFull()
                         ->blocks([
-                            Block::make('text')->schema(static::getBlockSchemaText()),
+                            Block::make('richEditor')->schema(static::getBlockSchemaRichEditor()),
                         ])
                         ->addActionLabel(__('filament.fields.add_content'))
 
@@ -294,38 +329,13 @@ class DynamicConfigResource extends Resource
         ];
     }
 
-    public static function getBlockSchemaText(): array
+    public static function getBlockSchemaRichEditor(): array
     {
         return [
-            Group::make()
-                ->schema([
-                    Select::make('alignment')
-                        ->options([
-                            'left' => 'Left',
-                            'center' => 'Center',
-                            'right' => 'Right',
-                        ])
-                        ->default('left')
-                        ->required(),
-                    Select::make('level')
-                        ->options([
-                            'p' => 'Paragraph',
-                            'h1' => 'H1',
-                            'h2' => 'H2',
-                            'h3' => 'H3',
-                            'h4' => 'H4',
-                            'h5' => 'H5',
-                            'h6' => 'H6',
-                        ])
-                        ->required(),
-                    Textarea::make('content')
-                        ->label('Contenu')
-                        ->required()
-                        ->rows(3)
-                        ->columnSpanFull(),
-                ])
-                ->columnSpanFull()
-                ->columns()
+            RichEditor::make('content')
+                ->label('Contenu')
+                ->required()
+                ->columnSpanFull(),
         ];
     }
 
