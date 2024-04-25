@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\PostComponent;
@@ -26,9 +27,10 @@ Route::group([
 ], function () {
     Route::get(LaravelLocalization::transRoute('routes.home'), HomeComponent::class)->name('home');
     Route::get(LaravelLocalization::transRoute('routes.contact'), ContactComponent::class)->name('contact');
-    Route::get(LaravelLocalization::transRoute('routes.page'), PageComponent::class)->name('page');
+    Route::get(LaravelLocalization::transRoute('routes.about'), AboutComponent::class)->name('about');
+//    Route::get(LaravelLocalization::transRoute('routes.page'), PageComponent::class)->name('page');
     Route::get(LaravelLocalization::transRoute('routes.service'), ServiceComponent::class)->name('service');
-    Route::get(LaravelLocalization::transRoute('routes.post'), PostComponent::class)->name('post');
+//    Route::get(LaravelLocalization::transRoute('routes.post'), PostComponent::class)->name('post');
 
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/livewire/update', $handle);

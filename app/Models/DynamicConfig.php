@@ -34,7 +34,7 @@ class DynamicConfig extends Model
     protected function content(): Attribute
     {
         return Attribute::make(
-            get: fn(string $content) => filament()->isServing() ? $content :
+            get: fn($content) => filament()->isServing() ? $content :
                 match ($this[self::TYPE]) {
                     ConfigDataType::INT => intval($content),
                     ConfigDataType::IMAGE => Storage::url($content),

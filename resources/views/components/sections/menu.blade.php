@@ -4,11 +4,15 @@
             <div class="col-md-4">
                 <nav id="mry-dynamic-menu">
                     <ul>
-                        @foreach(App\Models\Page::published()->get() as $record)
-                            <li class="menu-item">
-                                <a href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.page', array('record' => $record->slug)) }}"
-                                   class="mry-anima-link mry-default-link">{{$record->title}}</a>
-                        @endforeach
+{{--                        @foreach(App\Models\Page::published()->get() as $record)--}}
+{{--                            <li class="menu-item">--}}
+{{--                                <a href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.page', array('record' => $record->slug)) }}"--}}
+{{--                                   class="mry-anima-link mry-default-link">{{$record->title}}</a>--}}
+{{--                        @endforeach--}}
+                        <li class="menu-item">
+                            <a href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.about')}}"
+                               class="mry-anima-link mry-default-link">À propos</a>
+                        </li>
                         <li class="menu-item menu-item-has-children">
                             <a href="#"
                                class="mry-default-link">Services</a>

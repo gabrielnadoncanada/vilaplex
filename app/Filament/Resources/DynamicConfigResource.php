@@ -198,6 +198,10 @@ class DynamicConfigResource extends Resource
     public static function getBlockSchemaSection(): array
     {
         return [
+            TextInput::make('subtitle')
+                ->label(__('filament.fields.subtitle')),
+            TextInput::make('section_number')
+                ->label(__('filament.fields.section_number')),
             TextInput::make('title')
                 ->label(__('filament.fields.title'))
                 ->required(),

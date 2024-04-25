@@ -28,16 +28,16 @@
                                             $part2 = substr($title, $lastSpaceBefore75Percent);
                                         @endphp
                                         <div
-                                            class="mry-subtitle mry-mb-20">{{count($service->categories) ? $service->categories->first()->title : ''}}</div>
-                                        <h1 class="mry-mb-30">{{ trim($part1) }}<br><span
+                                            class="mry-subtitle mry-mb-20">Service</div>
+                                        <h1 class="mry-mb-30 mry-h1">{{ trim($part1) }}<br><span
                                                 class="mry-border-text">{{ trim($part2) }}</span><span
                                                 class="mry-animation-el"></span></h1>
                                         <div class="mry-text mry-mb-30 max-w-350px">{{$service->excerpt}}
                                         </div>
-{{--                                        <a class="mry-btn mry-default-link mry-anima-link"--}}
-{{--                                           href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.service.show', array('service' => $service->slug))}}">--}}
-{{--                                            {{__('app.home.hero.learn_more')}}</a>--}}
                                         <a class="mry-btn mry-default-link mry-anima-link"
+                                           href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.service', array('record' => $service->slug))}}">
+                                            {{__('app.home.hero.learn_more')}}</a>
+                                        <a class="mry-btn-text mry-default-link mry-anima-link"
                                            href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.contact')}}">
                                             {{__('app.home.hero.contact_us')}}</a>
                                     </div>

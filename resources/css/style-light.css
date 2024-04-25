@@ -149,7 +149,7 @@ a, a:hover {
 
 /* Text */
 
-.mry-h1, .mry-h2, .mry-h3, .mry-h4, .mry-h5, .mry-h6, h1, h2, h3, h4, h5, h6 {
+.mry-h1, .mry-h2, .mry-h3, .mry-h4, .mry-h5, .mry-h6{
 	position: relative;
 	margin: 0;
 	padding: 0;
@@ -160,31 +160,31 @@ a, a:hover {
 
 }
 
-.mry-h1, h1 {
+.mry-h1 {
 	font-size: 72px;
 	line-height: 84px;
 	font-weight: 900;
 }
 
-.mry-h2, h2 {
+.mry-h2 {
 	font-size: 48px;
 	line-height: 66px;
 	font-weight: 900;
 }
 
-.mry-h3, h3 {
+.mry-h3 {
 	font-size: 32px;
 	line-height: 40px;
 	font-weight: 900;
 }
 
-.mry-h4, h4 {
+.mry-h4 {
 	font-size: 22px;
 	line-height: 30px;
 	font-weight: 900;
 }
 
-.mry-h6, h6 {
+.mry-h6 {
 	font-size: 14px;
 }
 
@@ -537,7 +537,8 @@ a, a:hover {
 }
 
 .mry-app .mry-top-panel .mry-logo-frame .mry-logo {
-	width: 160px;
+    max-width: 160px;
+    width: 100%;
 }
 
 /* Menu Button */

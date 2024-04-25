@@ -2,5 +2,5 @@
 
 return [
     'home' => '/',
-    'service.show' => '/service/{service}',
+    'service' => '/service/{service}',
 ];

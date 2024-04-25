@@ -67,6 +67,7 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 __('filament.navigation.groups.general'),
                 __('filament.navigation.groups.administration'),
-            ]);
+            ])
+            ->sidebarCollapsibleOnDesktop();
     }
 }

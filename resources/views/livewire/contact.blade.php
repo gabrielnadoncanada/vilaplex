@@ -17,7 +17,7 @@
                                     <div class="mry-subtitle">{{__('app.contact.location')}}</div>
                                 </div>
                                 <div class="mry-fade-object mry-mb-100">
-                                    <h4 class="mry-mb-20 mry-fo">{{__('app.contact.welcome_to_visit')}}</h4>
+                                    <h4 class="mry-h4 mry-mb-20 mry-fo">{{__('app.contact.welcome_to_visit')}}</h4>
                                     <p class="mry-text mry-mb-20 mry-fo">
                                         {{App\Models\DynamicConfig::getConfig('country')}},
                                         {{App\Models\DynamicConfig::getConfig('city')}}<br>
@@ -33,7 +33,7 @@
                                     <div class="mry-subtitle">{{__('app.contact.contact')}}</div>
                                 </div>
                                 <div class="mry-fade-object mry-mb-100">
-                                    <h4 class="mry-mb-20 mry-fo">{{__('app.contact.shall_we_talk')}}</h4>
+                                    <h4 class="mry-h4 mry-mb-20 mry-fo">{{__('app.contact.shall_we_talk')}}</h4>
                                     <p class="mry-text mry-fo">Email: <a
                                             href="mailto:{{App\Models\DynamicConfig::getConfig('email')}}">
                                             {{App\Models\DynamicConfig::getConfig('email')}}
@@ -53,7 +53,7 @@
                             <div class="mry-border-text">03</div>
                             <div class="mry-subtitle">{{__('app.contact.contact_form')}}</div>
                         </div>
-                        <h2 class="mry-fo">{{__('app.contact.write_us_a_message')}}</h2>
+                        <h2 class="mry-fo mry-h2">{{__('app.contact.write_us_a_message')}}</h2>
                     </div>
                 </div>
                 <div class="col-lg-8">

@@ -3,6 +3,6 @@
 return [
     'home' => '/',
     'service' => '/service/{record}',
-    'page' => '{record}',
-    'contact' => 'contact2',
+    'contact' => 'contact',
+    'about' => 'about',
 ];
