@@ -441,23 +441,23 @@
 
         });
 
-        Scrollbar.use(OverscrollPlugin);
-        var scrollbar = Scrollbar.init(document.querySelector('#scroll'), {
-            damping: 0.07,
-            renderByPixel: true,
-            continuousScrolling: true,
-            plugins: {
-                overscroll: {
-                    effect: 'bounce',
-                    damping: 0.15,
-                    maxOverscroll: 80
-                },
-                mobile: {
-                    speed: 0.2,
-                    alwaysShowTracks: false
-                }
-            },
-        });
+        // Scrollbar.use(OverscrollPlugin);
+        // var scrollbar = Scrollbar.init(document.querySelector('#scroll'), {
+        //     damping: 0.07,
+        //     renderByPixel: true,
+        //     continuousScrolling: true,
+        //     plugins: {
+        //         overscroll: {
+        //             effect: 'bounce',
+        //             damping: 0.15,
+        //             maxOverscroll: 80
+        //         },
+        //         mobile: {
+        //             speed: 0.2,
+        //             alwaysShowTracks: false
+        //         }
+        //     },
+        // });
 
         $('.mry-scroll-hint').on('click', function () {
             scrollbar.scrollTo(0, 550, 1800);

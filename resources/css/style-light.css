@@ -2171,9 +2171,15 @@ blockquote:after {
 
 .mry-content-frame {
 	width: 100% !important;
-	height: 100vh !important;
+	
 	position: relative !important;
 	/*overflow: hidden !important;*/
+}
+
+body.home.mry-content-frame {
+
+    height: 100vh !important;
+    /*overflow: hidden !important;*/
 }
 
 /* Form  Validation
