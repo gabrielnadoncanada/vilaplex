@@ -34,20 +34,23 @@
     <div class="mry-bg-overlay"></div>
 </div>
 <div class="mry-banner mry-p-140-0">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="mry-main-title mry-title-center">
-                <div class="mry-subtitle mry-mb-20 mry-fo">{{ $subtitle ?? '' }}</div>
-                <h1 class="mry-h1 mry-mb-20 mry-fo">{{ trim($part1) }}<br><span
-                        class="mry-border-text">{{ trim($part2) }}</span><span class="mry-animation-el"></span></h1>
-                <div class="mry-text mry-fo max-w-450px mry-mx-auto">{{ $description }}</div>
-                <div class="mry-scroll-hint-frame">
-                    <a class="mry-scroll-hint mry-smooth-scroll mry-magnetic-link mry-fo" href="#mry-anchor">
-                        <span class="mry-magnetic-object"></span>
-                    </a>
-                    <div class="mry-label mry-fo">{{ __('app.service.scroll_down') }}</div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="mry-main-title mry-title-center">
+                    <div class="mry-subtitle mry-mb-20 mry-fo">{{ $subtitle ?? '' }}</div>
+                    <h1 class="mry-h1 mry-mb-20 mry-fo">{{ trim($part1) }}<br><span
+                            class="mry-border-text">{{ trim($part2) }}</span><span class="mry-animation-el"></span></h1>
+                    <div class="mry-text mry-fo max-w-450px mry-mx-auto">{{ $description }}</div>
+                    <div class="mry-scroll-hint-frame">
+                        <a class="mry-scroll-hint mry-smooth-scroll mry-magnetic-link mry-fo" href="#mry-anchor">
+                            <span class="mry-magnetic-object"></span>
+                        </a>
+                        <div class="mry-label mry-fo">{{ __('app.service.scroll_down') }}</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

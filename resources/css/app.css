@@ -18,3 +18,8 @@
 .max-w-450px {
     max-width: 450px;
 }
+
+
+body.home .mry-app {
+    overflow: hidden;
+}

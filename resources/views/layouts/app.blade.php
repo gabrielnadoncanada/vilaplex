@@ -22,8 +22,7 @@
 
     {{ $meta ?? '' }}
 </head>
-<body>
-
+<body class="{{Route::getCurrentRoute()->getName()}}">
 <div class="mry-app">
     <!-- cursor -->
     <div class="mry-magic-cursor">

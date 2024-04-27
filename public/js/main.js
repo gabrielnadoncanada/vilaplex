@@ -17,39 +17,39 @@
     });
 
 
-    Scrollbar.use(OverscrollPlugin);
-    var scrollbar = Scrollbar.init(document.querySelector('#scroll'), {
-        damping: 0.07,
-        renderByPixel: true,
-        continuousScrolling: true,
-        plugins: {
-            overscroll: {
-                effect: 'bounce',
-                damping: 0.15,
-                maxOverscroll: 80
-            },
-            mobile: {
-                speed: 0.2,
-                alwaysShowTracks: false
-            }
-        },
-    });
+    // Scrollbar.use(OverscrollPlugin);
+    // var scrollbar = Scrollbar.init(document.querySelector('#scroll'), {
+    //     damping: 0.07,
+    //     renderByPixel: true,
+    //     continuousScrolling: true,
+    //     plugins: {
+    //         overscroll: {
+    //             effect: 'bounce',
+    //             damping: 0.15,
+    //             maxOverscroll: 80
+    //         },
+    //         mobile: {
+    //             speed: 0.2,
+    //             alwaysShowTracks: false
+    //         }
+    //     },
+    // });
     var header = $(".mry-top-panel"); // Select the header by its ID
     var stickyZone = 100; // Set the scroll position where the class should be added
     // Listen to the scroll event of the custom scrollbar
-    scrollbar.addListener(function(status) {
-        var scrollOffset = status.offset.y; // Get the vertical scroll position
-
-        if (scrollOffset > stickyZone) {
-            header.addClass('sticky'); // Add the class if scrolled beyond the stickyZone
-        } else {
-            header.removeClass('sticky'); // Remove the class if scrolled to the top
-        }
-    });
-
-    $('.mry-scroll-hint').on('click', function () {
-        scrollbar.scrollTo(0, 550, 1800);
-    });
+    // scrollbar.addListener(function(status) {
+    //     var scrollOffset = status.offset.y; // Get the vertical scroll position
+    //
+    //     if (scrollOffset > stickyZone) {
+    //         header.addClass('sticky'); // Add the class if scrolled beyond the stickyZone
+    //     } else {
+    //         header.removeClass('sticky'); // Remove the class if scrolled to the top
+    //     }
+    // });
+    //
+    // $('.mry-scroll-hint').on('click', function () {
+    //     scrollbar.scrollTo(0, 550, 1800);
+    // });
 
     // portfolio filter
     $('.mry-filter a').on('click', function () {
