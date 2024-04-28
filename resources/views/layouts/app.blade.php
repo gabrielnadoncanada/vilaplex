@@ -18,6 +18,9 @@
     {{ $meta ?? '' }}
 </head>
 <body class="{{Route::getCurrentRoute()->getName()}}">
+@if (session('status'))
+    <x-alert :message="session('status')" theme="success"></x-alert>
+@endif
 <div class="mry-app">
     <!-- cursor -->
     <div class="mry-magic-cursor">

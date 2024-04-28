@@ -1,16 +1,16 @@
 (function () {
 
     'use strict';
-
+  
     // parsely validation
-    $('#form').parsley();
+    // $('#form').parsley();
 
     // clear parsley empty elements
-    if ($('#form').length > 0) {
-        $('#form').parsley().on('field:success', function () {
-            $('ul.parsley-errors-list').not(':has(li)').remove();
-        });
-    }
+    // if ($('#form').length > 0) {
+    //     $('#form').parsley().on('field:success', function () {
+    //         $('ul.parsley-errors-list').not(':has(li)').remove();
+    //     });
+    // }
 
     $(document).ready(function () {
         $('html').removeClass('is-animating');

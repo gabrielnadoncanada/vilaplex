@@ -15,5 +15,14 @@ return [
                 'h6' => 'h6',
             ],
         ],
+        'alert' => [
+            'class' => Components\Alert::class,
+            'themes' => [
+                'success' => 'border-green-400 text-green-700',
+                'error' => 'border-red-400 text-red-700',
+                'warning' => 'border-yellow-400 text-yellow-700',
+                'info' => 'border-blue-400 text-blue-700',
+            ],
+        ],
     ],
 ];
