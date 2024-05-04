@@ -16,8 +16,8 @@ class Message extends Model
 
     protected static function booted()
     {
-//        static::created(function ($item) {
-//            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new MessageCreatedMail($item));
-//        });
+        static::created(function ($item) {
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new MessageCreatedMail($item));
+        });
     }
 }
