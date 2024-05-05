@@ -43,7 +43,6 @@ class ServiceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Application';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -62,7 +61,6 @@ class ServiceResource extends Resource
         return $form
             ->schema(static::getFormFieldsSchema());
     }
-
 
 
     public static function getFormFieldsSchema(): array
@@ -114,14 +112,6 @@ class ServiceResource extends Resource
         ];
     }
 
-
-//    public static function getRelations(): array
-//    {
-//        return [
-//            CategoriesRelationManager::class,
-//        ];
-//    }
-
     public static function table(Table $table): Table
     {
         return $table
@@ -157,6 +147,7 @@ class ServiceResource extends Resource
                 ]),
             ]);
     }
+
     public static function getPages(): array
     {
         return [

@@ -20,10 +20,6 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
-    protected static bool $shouldRegisterNavigation = true;
-
-    protected static ?string $navigationGroup = 'Application';
-
     public static function getNavigationLabel(): string
     {
         return __('filament.users.title');

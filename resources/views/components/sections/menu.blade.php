@@ -25,6 +25,10 @@
                             </ul>
                         </li>
                         <li class="menu-item">
+                            <a href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.posts')}}"
+                               class="mry-anima-link mry-default-link">Blogue</a>
+                        </li>
+                        <li class="menu-item">
                             <a href="{{LaravelLocalization::getURLFromRouteNameTranslated( App::currentLocale(), 'routes.contact')}}"
                                class="mry-anima-link mry-default-link">Contact</a>
                         </li>

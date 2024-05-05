@@ -40,11 +40,9 @@ class DynamicConfigResource extends Resource
 
     protected static ?string $modelLabel = 'configuration';
 
-    protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench';
 
-    protected static ?string $navigationGroup = 'Application';
 
     public static function form(Form $form): Form
     {

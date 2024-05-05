@@ -4,6 +4,7 @@ use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\PostComponent;
+use App\Http\Livewire\PostsComponent;
 use App\Http\Livewire\ServiceComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\PageComponent;
@@ -30,6 +31,8 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.about'), AboutComponent::class)->name('about');
 //    Route::get(LaravelLocalization::transRoute('routes.page'), PageComponent::class)->name('page');
     Route::get(LaravelLocalization::transRoute('routes.service'), ServiceComponent::class)->name('service');
+    Route::get(LaravelLocalization::transRoute('routes.posts'), PostsComponent::class)->name('posts');
+    Route::get(LaravelLocalization::transRoute('routes.post'), PostComponent::class)->name('post');
 //    Route::get(LaravelLocalization::transRoute('routes.post'), PostComponent::class)->name('post');
 
     Livewire::setUpdateRoute(function ($handle) {

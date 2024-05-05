@@ -3,13 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Enums\DisplayStatus;
+use App\Models\Post;
 use App\Models\Service;
 use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
 class PostComponent extends Component
 {
-    public Service $record;
+    public Post $record;
 
     public function mount()
     {

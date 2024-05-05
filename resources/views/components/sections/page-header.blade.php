@@ -1,29 +1,34 @@
-@props(['subtitle', 'title', 'description', 'image'])
+@props(['subtitle', 'title','second_title', 'description', 'image'])
 @if (!isset($image))
     @php
         $image = 'img/light/projects/prjct-6/1.jpg';
     @endphp
 @endif
 @php
-    $specialChars = ['!', '.', '?'];
-    $asSpecialChar = false;
-    $titleLength = strlen($title);
+    if(isset($second_title)){
+        $part1 = $title;
+        $part2 = $second_title;
+    } else {
+        $specialChars = ['!', '.', '?'];
+        $asSpecialChar = false;
+        $titleLength = strlen($title);
 
-    for ($i = 0; $i < $titleLength; $i++) {
-        if (in_array($title[$i], $specialChars)) {
-            $part1 = substr($title, 0, $i + 1);
-            $part2 = substr($title, $i + 1);
-            $asSpecialChar = true;
-            break;
+        for ($i = 0; $i < $titleLength; $i++) {
+            if (in_array($title[$i], $specialChars)) {
+                $part1 = substr($title, 0, $i + 1);
+                $part2 = substr($title, $i + 1);
+                $asSpecialChar = true;
+                break;
+            }
         }
-    }
 
-    if (!$asSpecialChar) {
-        $length = strlen($title);
-        $part1Length = (int) ($length * 0.75);
-        $lastSpaceBefore75Percent = strrpos(substr($title, 0, $part1Length), ' ');
-        $part1 = substr($title, 0, $lastSpaceBefore75Percent);
-        $part2 = substr($title, $lastSpaceBefore75Percent);
+        if (!$asSpecialChar) {
+            $length = strlen($title);
+            $part1Length = (int) ($length * 0.75);
+            $lastSpaceBefore75Percent = strrpos(substr($title, 0, $part1Length), ' ');
+            $part1 = substr($title, 0, $lastSpaceBefore75Percent);
+            $part2 = substr($title, $lastSpaceBefore75Percent);
+        }
     }
 @endphp
 
@@ -40,7 +45,8 @@
                 <div class="mry-main-title mry-title-center">
                     <div class="mry-subtitle mry-mb-20 mry-fo">{{ $subtitle ?? '' }}</div>
                     <h1 class="mry-h1 mry-mb-20 mry-fo">{{ trim($part1) }}<br><span
-                            class="mry-border-text">{{ trim($part2) }}</span><span class="mry-animation-el"></span></h1>
+                                class="mry-border-text">{{ trim($part2) }}</span><span class="mry-animation-el"></span>
+                    </h1>
                     <div class="mry-text mry-fo max-w-450px mry-mx-auto">{{ $description }}</div>
                     <div class="mry-scroll-hint-frame">
                         <a class="mry-scroll-hint mry-smooth-scroll mry-magnetic-link mry-fo" href="#mry-anchor">
