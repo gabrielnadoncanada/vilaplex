@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog\Post;
 use App\Models\Page;
 use App\Settings\ThemeSettings;
-use Illuminate\Support\Facades\Redirect;
 
 class PageController extends Controller
 {
@@ -30,11 +28,11 @@ class PageController extends Controller
     public function serviceIndex()
     {
         $page = Page::find(app(ThemeSettings::class)->site_service_page_id);
+
         return view('page.service-index', [
             'record' => $page,
         ]);
     }
-
 
     public function show(Page $page)
     {

@@ -1,13 +1,21 @@
 <div class="container mt-40">
     <div class="row row-cols-{{ $columns_mobile }} row-cols-md-{{ $columns_desktop }} text-{{ $column_alignment }}">
         @foreach($blocks as $blockItem)
-            <div class="col text-center">
-                <div class="mb-40 fo {{$blockItem['heading_level']}}">{{ $blockItem['title'] }}</div>
+            <div class="col text-center mb-100">
+                <div class="numbering">
+                    @if(isset($blockItem['subtitle']) && $blockItem['subtitle'])
+                        <p class="subtitle mb-0">{{ $blockItem['subtitle'] }}</p>
+                    @endif
+                </div>
+                @if($blockItem['title'])
+                    @php
+                    $marginClass = '';
+                    @endphp
 
-                @if(isset($blockItem['subtitle']) && $blockItem['subtitle'])
-                    <p class="subtitle">{{ $blockItem['subtitle'] }}</p>
+                    <div class="fo {{$blockItem['heading_level']}}">
+                        {{ $blockItem['title'] }}
+                    </div>
                 @endif
-
                 @if(isset($blockItem['text']) && $blockItem['text'])
                     <div>{!! $blockItem['text'] !!}</div>
                 @endif

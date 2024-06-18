@@ -18,8 +18,7 @@ class Slider
     public static function make(
         string $name = 'slider',
         string $context = 'form',
-    ): Block
-    {
+    ): Block {
         return Block::make($name)
             ->schema([
                 Tabs::make()->tabs([
@@ -60,7 +59,7 @@ class Slider
                                 ->label('Activate Navigation')
                                 ->default(true),
                         ]),
-                ])
+                ]),
             ]);
     }
 }

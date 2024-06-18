@@ -19,8 +19,6 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Pboivin\FilamentPeek\Tables\Actions\ListPreviewAction;
 
 class PostResource extends Resource
@@ -33,7 +31,6 @@ class PostResource extends Resource
 
     protected static ?string $navigationGroup = 'Service';
 
-
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -42,7 +39,6 @@ class PostResource extends Resource
     {
         return 'App\Models\ServicePost';
     }
-
 
     public static function form(Form $form): Form
     {

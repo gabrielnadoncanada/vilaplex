@@ -11,8 +11,7 @@ class Heading
     public static function make(
         string $name = 'heading',
         string $context = 'form',
-    ): Block
-    {
+    ): Block {
         return Block::make($name)
             ->schema([
                 RichEditor::make('heading')
@@ -27,12 +26,12 @@ class Heading
                 Select::make('heading_level')
                     ->label('Heading Level')
                     ->options([
-                        'small' => 'Small',
-                        'medium' => 'Medium',
-                        'large' => 'Large',
-                        'extra-large' => 'Extra Large',
+                        'h4' => 'Small',
+                        'h3' => 'Medium',
+                        'h2' => 'Large',
+                        'h1' => 'Extra Large',
                     ])
-                    ->default('medium'),
+                    ->default('h3'),
             ]);
     }
 }

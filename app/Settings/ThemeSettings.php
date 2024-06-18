@@ -9,7 +9,9 @@ class ThemeSettings extends Settings
     public ?string $site_title;
 
     public ?string $site_home_page_id;
+
     public ?string $site_service_page_id;
+
     public ?string $site_blog_page_id;
 
     public ?string $site_tag_line;

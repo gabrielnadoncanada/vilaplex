@@ -41,9 +41,9 @@ class FilamentServiceProvider extends ServiceProvider
     protected function configureTable(): void
     {
         Table::configureUsing(
-            fn(Table $table) => $table
+            fn (Table $table) => $table
                 ->filtersTriggerAction(
-                    fn(Action $action) => $action
+                    fn (Action $action) => $action
                         ->button()
                         ->label('Filtres'),
                 )->filtersFormWidth('2xl')
@@ -77,7 +77,7 @@ class FilamentServiceProvider extends ServiceProvider
 
         TableReplicateAction::configureUsing(function (TableReplicateAction $action) {
             $action->beforeReplicaSaved(function (Model $replica): void {
-                if($replica->slug === null || $replica->title === null) {
+                if ($replica->slug === null || $replica->title === null) {
                     return;
                 }
                 $uniqueId = substr(md5(uniqid(rand(), true)), 0, 8);
@@ -118,8 +118,8 @@ class FilamentServiceProvider extends ServiceProvider
 
         Forms\Components\Repeater::configureUsing(function ($component) {
             $component
-                ->collapseAllAction(fn($action) => $action->icon('heroicon-o-arrows-pointing-in'))
-                ->expandAllAction(fn($action) => $action->icon('heroicon-o-arrows-pointing-out'));
+                ->collapseAllAction(fn ($action) => $action->icon('heroicon-o-arrows-pointing-in'))
+                ->expandAllAction(fn ($action) => $action->icon('heroicon-o-arrows-pointing-out'));
         });
 
         Forms\Components\RichEditor::configureUsing(function ($component) {
@@ -167,7 +167,7 @@ class FilamentServiceProvider extends ServiceProvider
     {
         Filament::registerRenderHook(
             'panels::body.start',
-            fn(): View => view('components.staging-banner'),
+            fn (): View => view('components.staging-banner'),
         );
     }
 }

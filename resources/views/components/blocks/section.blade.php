@@ -1,5 +1,5 @@
 <section class="col-lg-12 mb-100 text-center">
-    @if($section_number || $block['data']['subtitle'])
+    @if($section_number)
         <div class="numbering fo">
             @if($section_number)
                 <div

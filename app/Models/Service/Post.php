@@ -34,6 +34,7 @@ class Post extends Model
             },
         );
     }
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'service_category_post', 'service_post_id', 'service_category_id');

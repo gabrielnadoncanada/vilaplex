@@ -3,10 +3,8 @@
 namespace App\Filament\Blocks;
 
 use App\Filament\Fields\UrlSelectionField;
-use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -19,8 +17,7 @@ class MultiColumn
     public static function make(
         string $name = 'multicolumn',
         string $context = 'form',
-    ): Block
-    {
+    ): Block {
         return Block::make($name)
             ->schema([
                 TextInput::make('columns_desktop')
@@ -29,13 +26,13 @@ class MultiColumn
                     ->default(3)
                     ->minValue(1)
                     ->maxValue(6),
-                Select::make('column_alignment')
-                    ->label('Column Alignment')
-                    ->options([
-                        'left' => 'Left',
-                        'center' => 'Center',
-                    ])
-                    ->default('left'),
+//                Select::make('column_alignment')
+//                    ->label('Column Alignment')
+//                    ->options([
+//                        'left' => 'Left',
+//                        'center' => 'Center',
+//                    ])
+//                    ->default('left'),
                 Select::make('columns_mobile')
                     ->label('Columns on Mobile')
                     ->options([
@@ -43,9 +40,9 @@ class MultiColumn
                         '2' => '2',
                     ])
                     ->default('1'),
-                Toggle::make('swipe_on_mobile')
-                    ->label('Swipe on Mobile')
-                    ->default(false),
+//                Toggle::make('swipe_on_mobile')
+//                    ->label('Swipe on Mobile')
+//                    ->default(false),
                 Repeater::make('blocks')
                     ->label('Blocks')
                     ->schema([
@@ -59,7 +56,7 @@ class MultiColumn
                                 'h2' => 'Large',
                                 'h1' => 'Extra Large',
                             ])
-                            ->default('medium'),
+                            ->default('h3'),
                         RichEditor::make('text'),
                         Fieldset::make('primary action')
                             ->schema([

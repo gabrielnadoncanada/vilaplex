@@ -13,7 +13,7 @@ class Content
     ): Builder {
         return Builder::make($name)
             ->blocks([
-               RichText::make()
+                RichText::make(),
 
             ])
             ->addActionLabel('Add block')

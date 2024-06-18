@@ -7,7 +7,6 @@ use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 
@@ -16,9 +15,8 @@ class Banner
     public static function make(
         string $name = 'banner',
         string $context = 'form',
-        bool   $hasAction = true,
-    ): Block
-    {
+        bool $hasAction = true,
+    ): Block {
         $schema = [
             TextInput::make('subtitle'),
             Textarea::make('title')->required(),
@@ -28,14 +26,13 @@ class Banner
         ];
 
         if ($hasAction) {
-            $schema[] =  self::primaryActionFieldset();
-            $schema[] =  self::secondaryActionFieldset();
+            $schema[] = self::primaryActionFieldset();
+            $schema[] = self::secondaryActionFieldset();
         }
 
         return Block::make($name)
             ->schema($schema);
     }
-
 
     public static function primaryActionFieldset(): Fieldset
     {

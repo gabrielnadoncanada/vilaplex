@@ -24,8 +24,8 @@ class Post extends Model
         'status' => PublishedStatus::class,
         'content' => 'array',
     ];
-    protected $table = 'blog_posts';
 
+    protected $table = 'blog_posts';
 
     protected function slug(): Attribute
     {

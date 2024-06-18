@@ -4,7 +4,6 @@ namespace Database\Factories\Blog;
 
 use App\Enums\PublishedStatus;
 use App\Models\Blog\Category;
-use App\Models\Blog\Post;
 use Database\Factories\Concerns\CanCreateImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

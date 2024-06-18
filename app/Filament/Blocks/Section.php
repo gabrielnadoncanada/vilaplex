@@ -5,27 +5,23 @@ namespace App\Filament\Blocks;
 use App\Filament\Fields\UrlSelectionField;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
-
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\ToggleButtons;
 
 class Section
 {
     public static function make(
         string $name = 'section',
         string $context = 'form',
-    ): Block
-    {
+    ): Block {
         return Block::make($name)
             ->schema([
                 TextInput::make('section_number'),
                 TextInput::make('subtitle'),
-                Textarea::make('title')->required(),
+                Textarea::make('title'),
                 Select::make('heading_level')
                     ->label('Heading Level')
                     ->options([
@@ -49,10 +45,10 @@ class Section
 
                 Builder::make('blocks')
                     ->blocks([
-                        MultiColumn::make()
+                        MultiColumn::make(),
                     ])
                     ->addActionLabel('Add block')
-                    ->collapsible()
+                    ->collapsible(),
             ]);
     }
 }

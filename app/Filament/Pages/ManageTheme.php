@@ -4,7 +4,6 @@ namespace App\Filament\Pages;
 
 use App\Filament\Fields\MenuSelect;
 use App\Filament\Fields\PageSelect;
-use App\Filament\Fields\PostSelect;
 use App\Settings\ThemeSettings;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Tabs;
@@ -22,11 +21,11 @@ class ManageTheme extends SettingsPage
 
     protected static ?int $navigationSort = 5;
 
-
     public function form(Form $form): Form
     {
         return $form
             ->schema([
+
                 Tabs::make('Tabs')
                     ->tabs([
                         Tabs\Tab::make('General')

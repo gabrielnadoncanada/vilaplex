@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Enums\PublishedStatus;
 use App\Filament\Fields\TitleWithSlugInput;
 use App\Filament\Resources\PageResource\Pages;
-use App\Filament\Resources\PostTypeResource\Pages\ManageCategories;
 use App\Models\Page;
 use App\Traits\HasTemplates;
 use Filament\Forms\Components\FileUpload;
@@ -28,8 +27,8 @@ class PageResource extends Resource
     protected static ?string $model = Page::class;
 
     protected static ?string $navigationGroup = 'Site';
-    protected static ?int $navigationSort = 1;
 
+    protected static ?int $navigationSort = 1;
 
     protected static bool $shouldRegisterNavigation = true;
 

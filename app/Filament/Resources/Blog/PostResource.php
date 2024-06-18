@@ -30,17 +30,14 @@ class PostResource extends Resource
 
     protected static ?string $navigationGroup = 'Blog';
 
-
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
 
     public static function getTemplateModel(): string
     {
         return 'App\Models\BlogPost';
     }
-
 
     public static function form(Form $form): Form
     {

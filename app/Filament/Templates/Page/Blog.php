@@ -3,13 +3,11 @@
 namespace App\Filament\Templates\Page;
 
 use App\Filament\Blocks\Banner;
-use App\Filament\Blocks\Slider;
 use App\Filament\Templates\BaseTemplate;
 use Filament\Forms\Components\Builder;
 
 final class Blog extends BaseTemplate
 {
-
     public static function title()
     {
         return 'Blog';
@@ -19,22 +17,22 @@ final class Blog extends BaseTemplate
     {
         return [
             self::headerSection([
-                Builder::make('items')
+                Builder::make('header_section')
                     ->blocks([
                         Banner::make(hasAction: false)
-                            ->maxItems(1)
+                            ->maxItems(1),
                     ])
-                    ->default([["type" => "banner", "data" => []]])
-                    ->deletable(false)
+                    ->default([['type' => 'banner', 'data' => []]])
+                    ->deletable(false),
             ]),
             self::contentSection(),
             self::footerSection([
-                Builder::make('items')
+                Builder::make('footer_section')
                     ->blocks([
                         Banner::make()
-                            ->maxItems(1)
+                            ->maxItems(1),
                     ])
-                    ->default([["type" => "banner", "data" => []]])
+                    ->default([['type' => 'banner', 'data' => []]]),
             ]),
         ];
     }

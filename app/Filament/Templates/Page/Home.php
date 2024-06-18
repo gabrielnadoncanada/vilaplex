@@ -6,7 +6,7 @@ use App\Filament\Blocks\Slider;
 use App\Filament\Templates\BaseTemplate;
 use Filament\Forms\Components\Builder;
 
-final class Home  extends BaseTemplate
+final class Home extends BaseTemplate
 {
     public string $view = 'templates.page.home';
 
@@ -19,12 +19,12 @@ final class Home  extends BaseTemplate
     {
         return [
             self::contentSection([
-                Builder::make('items')
+                Builder::make('content_section')
                     ->blocks([
                         Slider::make()
-                            ->maxItems(1)
+                            ->maxItems(1),
                     ])
-                    ->deletable(false)
+                    ->deletable(false),
             ]),
         ];
     }

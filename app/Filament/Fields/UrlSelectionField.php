@@ -3,9 +3,8 @@
 namespace App\Filament\Fields;
 
 use App\Models\Blog\Post as BlogPost;
-use App\Models\Service\Post as ServicePost;
-use App\Models\CustomType\CustomType;
 use App\Models\Page;
+use App\Models\Service\Post as ServicePost;
 use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Component;
@@ -18,92 +17,80 @@ class UrlSelectionField extends Forms\Components\Field
 {
     protected string $view = 'filament-forms::components.group';
 
-    protected array|Closure $extraFields = [];
+    protected array | Closure $extraFields = [];
 
     public function getChildComponents(): array
     {
         return [
-            $this->createTypeSelect(),
-            $this->createSchemaGroup('data', 'type', fn(Get $get) => $this->getSchemaByType($get('type'))),
-            $this->createExtraFieldsGroup('data'),
+            Select::make('type')
+                ->label(__('filament.menu.items-modal.type'))
+                ->options($this->getTypeOptions())
+                ->afterStateUpdated(fn ($state, Select $component) => $this->updateAfterState($component))
+                ->reactive(),
+            $this->getDataGroup(),
+            $this->getExtraFieldsGroup(),
         ];
     }
 
-    protected function createTypeSelect(): Select
+    protected function getTypeOptions(): array
     {
-        return Select::make('type')
-            ->label(__('filament.menu.items-modal.type'))
-            ->options($this->getItemTypeOptions())
-            ->afterStateUpdated(function ($state, Select $component) {
-                $component->getContainer()->getComponent(fn(Component $component) => $component instanceof Group)
-                    ?->getChildComponentContainer()
-                    ->fill();
-            })
-            ->reactive();
+        $itemTypes = $this->getItemTypes();
+
+        return array_combine(array_keys($itemTypes), array_column($itemTypes, 'name'));
     }
 
-    protected function createSchemaGroup(string $statePath, string $condition, callable $schema): Group
+    protected function updateAfterState(Select $component): void
+    {
+        $component->getContainer()->getComponent(fn (Component $component) => $component instanceof Group)
+            ?->getChildComponentContainer()
+            ->fill();
+    }
+
+    protected function getDataGroup(): Group
     {
         return Group::make()
-            ->statePath($statePath)
-            ->whenTruthy($condition)
-            ->schema($schema);
+            ->statePath('data')
+            ->whenTruthy('type')
+            ->schema(fn (Get $get) => $this->getItemTypes()[$get('type')]['fields'] ?? []);
     }
 
-    protected function createExtraFieldsGroup(string $statePath): Group
+    protected function getExtraFieldsGroup(): Group
     {
         return Group::make()
-            ->statePath($statePath)
-            ->visible(fn(Component $component) => !empty($component->evaluate($this->extraFields)))
-            ->schema(fn(Component $component) => $this->extraFields);
-    }
-
-    protected function getSchemaByType(?string $type): array
-    {
-        return $this->getItemTypes()[$type]['fields'] ?? [];
-    }
-
-    protected function getItemTypeOptions(): array
-    {
-        return array_combine(
-            array_keys($this->getItemTypes()),
-            array_column($this->getItemTypes(), 'name')
-        );
+            ->statePath('data')
+            ->visible(fn (Component $component) => ! empty($component->evaluate($this->extraFields)))
+            ->schema(fn (Component $component) => $this->extraFields);
     }
 
     public function getItemTypes(): array
     {
         return [
-            'External' => [
-                'name' => 'External',
-                'fields' => $this->buildLinkFields(fn() => TextInput::make('url')
-                    ->label(__('filament.menu.attributes.url'))
-                    ->required())
-            ],
-            'App\Models\Blog\Post' => [
-                'name' => 'Blog post',
-                'fields' => $this->buildLinkFields(fn() => Select::make('url')
-                    ->options(BlogPost::pluck('title', 'id')->toArray())
-                    ->live()
-                    ->label(__('filament.menu.attributes.url'))
-                    ->required())
-            ],
-            'App\Models\Service\Post' => [
-                'name' => 'Service post',
-                'fields' => $this->buildLinkFields(fn() => Select::make('url')
-                    ->options(ServicePost::pluck('title', 'id')->toArray())
-                    ->live()
-                    ->label(__('filament.menu.attributes.url'))
-                    ->required())
-            ],
-            'App\Models\Page' => [
-                'name' => 'Page',
-                'fields' => $this->buildLinkFields(fn() => Select::make('url')
-                    ->options(Page::pluck('title', 'id')->toArray())
-                    ->live()
-                    ->label(__('filament.menu.attributes.url'))
-                    ->required())
-            ],
+            'External' => $this->buildItemType('External', TextInput::make('url')
+                ->label(__('filament.menu.attributes.url'))
+                ->required()),
+            'App\Models\Blog\Post' => $this->buildItemType('Blog post', Select::make('url')
+                ->options(BlogPost::pluck('title', 'id')->toArray())
+                ->live()
+                ->label(__('filament.menu.attributes.url'))
+                ->required()),
+            'App\Models\Service\Post' => $this->buildItemType('Service post', Select::make('url')
+                ->options(ServicePost::pluck('title', 'id')->toArray())
+                ->live()
+                ->label(__('filament.menu.attributes.url'))
+                ->required()),
+            'App\Models\Page' => $this->buildItemType('Page', Select::make('url')
+                ->options(Page::pluck('title', 'id')->toArray())
+                ->live()
+                ->label(__('filament.menu.attributes.url'))
+                ->required()),
+        ];
+    }
+
+    protected function buildItemType(string $name, $urlField): array
+    {
+        return [
+            'name' => $name,
+            'fields' => $this->buildLinkFields(fn () => $urlField),
         ];
     }
 
