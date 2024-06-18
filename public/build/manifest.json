@@ -1,0 +1,34 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/css/filament/admin/theme.css": {
+    "file": "assets/theme.css",
+    "isEntry": true,
+    "src": "resources/css/filament/admin/theme.css"
+  },
+  "resources/css/fonts/GlacialIndifference-Bold.otf": {
+    "file": "assets/GlacialIndifference-Bold.otf",
+    "src": "resources/css/fonts/GlacialIndifference-Bold.otf"
+  },
+  "resources/css/fonts/GlacialIndifference-Italic.otf": {
+    "file": "assets/GlacialIndifference-Italic.otf",
+    "src": "resources/css/fonts/GlacialIndifference-Italic.otf"
+  },
+  "resources/css/fonts/GlacialIndifference-Regular.otf": {
+    "file": "assets/GlacialIndifference-Regular.otf",
+    "src": "resources/css/fonts/GlacialIndifference-Regular.otf"
+  },
+  "resources/css/theme/style-formats.css": {
+    "file": "assets/style-formats.css",
+    "isEntry": true,
+    "src": "resources/css/theme/style-formats.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
