@@ -31,7 +31,28 @@ return [
             'custom_configs' => [
 
             ],
+
         ],
+        'heading-only' => [
+            'plugins' => 'autoresize lists',
+            'toolbar' => 'styleselect | bold italic underline strikethrough | alignjustify alignright aligncenter alignleft | bullist numlist',
+            'upload_directory' => null,
+            'custom_configs' => [
+                'style_formats' => [
+                    ['title' => 'Heading 1', 'format' => 'h1'],
+                    ['title' => 'Heading 2', 'format' => 'h2'],
+                    ['title' => 'Heading 3', 'format' => 'h3'],
+                    ['title' => 'Heading 4', 'format' => 'h4'],
+                    ['title' => 'Heading 5', 'format' => 'h5'],
+                    ['title' => 'Heading 6', 'format' => 'h6'],
+                    ['title' => 'border-text', 'block' => 'div', 'wrapper' => true, 'classes' => 'border-text'],
+                    ['title' => 'subtitle', 'block' => 'div', 'wrapper' => true, 'classes' => 'subtitle'],
+
+                ],
+                'menubar' => false, // Optional: hides the menubar for a cleaner interface
+            ],
+        ],
+
         /*
         |--------------------------------------------------------------------------
         | Custom Configs

@@ -8,7 +8,7 @@ class ServiceController extends Controller
 {
     public function show(Post $post)
     {
-        return view('service.show', [
+        return view('templates.single', [
             'record' => $post,
         ]);
     }

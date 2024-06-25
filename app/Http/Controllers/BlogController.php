@@ -8,7 +8,7 @@ class BlogController extends Controller
 {
     public function show(Post $post)
     {
-        return view('page.show', [
+        return view('templates.single', [
             'record' => $post,
         ]);
     }

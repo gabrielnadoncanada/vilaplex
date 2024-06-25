@@ -26,3 +26,19 @@
     left: 0;
     top: calc(50% - 4px);
 }
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+
+
+

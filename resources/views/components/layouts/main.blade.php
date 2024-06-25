@@ -44,6 +44,6 @@
 
 <script src="{{asset("js/plugins/parsley.min.js")}}"></script>
 <script src="{{asset("js/main.js")}}"></script>
-@stack('scripts')
+<script src="{{asset("js/plugins/canvas.js")}}"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@
 <header>
     <div class="top-panel">
         <div class="logo-frame">
-            <a href="{{route('page.index')}}" class="default-link anima-link">
+            <a href="/" class="default-link anima-link">
                 @if(app(App\Settings\ThemeSettings::class)->site_logo)
                     <img class="logo" src="{{Storage::url(app(App\Settings\ThemeSettings::class)->site_logo)}}"
                          alt="Mireya">

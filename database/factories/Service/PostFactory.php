@@ -2,7 +2,6 @@
 
 namespace Database\Factories\Service;
 
-use App\Enums\PublishedStatus;
 use App\Models\Service\Post;
 use Database\Factories\Concerns\CanCreateImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,10 +18,9 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence,
             'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->sentence,
-            'published_at' => $this->faker->optional()->dateTime,
+            'published_at' => now(),
             'content' => $this->faker->optional()->text,
-            'template' => 'App\\Filament\\Templates\\ServicePost\\Single',
-            'status' => PublishedStatus::PUBLISHED,
+            'is_visible' => true,
             'image' => $this->createImage(),
             'created_at' => now(),
             'updated_at' => now(),

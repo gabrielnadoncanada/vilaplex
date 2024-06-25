@@ -16,10 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('description')->nullable();
-            $table->dateTime('published_at')->nullable();
+            $table->date('published_at')->default(now());
             $table->longText('content')->nullable();
-            $table->string('status');
-            $table->string('template')->default('App\\\Filament\\\Templates\\Post\\Single');
+            $table->boolean('is_visible')->default(true);
             $table->string('image')->nullable();
             $table->timestamps();
         });

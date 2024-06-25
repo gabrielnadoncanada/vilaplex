@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Service\PostResource\Pages;
 
-use App\Filament\Blocks\Section;
+use App\Filament\Blocks\RichText;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Component;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
@@ -23,7 +23,7 @@ trait HasPostPreview
 
     protected function getPreviewModalView(): ?string
     {
-        return 'service.show';
+        return 'templates.single';
     }
 
     public function updateBuilderFieldWithEditorData(string $builderName, array $editorData): void
@@ -52,12 +52,12 @@ trait HasPostPreview
         };
     }
 
-    public static function getBuilderEditorSchema(string $builderName): Component|array
+    public static function getBuilderEditorSchema(string $builderName): Component | array
     {
         return match ($builderName) {
             'content_section' => Builder::make('items')
                 ->blocks([
-                    Section::make()
+                    RichText::make(),
                 ])
         };
     }

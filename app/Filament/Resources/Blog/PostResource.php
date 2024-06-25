@@ -2,15 +2,21 @@
 
 namespace App\Filament\Resources\Blog;
 
-use App\Enums\PublishedStatus;
+use App\Filament\Fields\IsVisible;
+use App\Filament\Fields\Meta;
 use App\Filament\Fields\TitleWithSlugInput;
 use App\Filament\Resources\Blog\PostResource\Pages;
 use App\Models\Blog\Post;
+use App\Traits\HasMeta;
 use App\Traits\HasTemplates;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -41,41 +47,71 @@ class PostResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Section::make('General')
-                    ->schema(self::getGeneralSchema())
-                    ->collapsible(),
-                ...self::getTemplateSchemas(),
-            ]);
-    }
-
-    protected static function getGeneralSchema(): array
-    {
-        return [
-            TitleWithSlugInput::make(
-                fieldTitle: 'title',
-                fieldSlug: 'slug',
-            )
-                ->label('Title'),
-            Textarea::make('description')
-                ->required(),
-            Select::make('status')
-                ->label(__('status'))
-                ->options(PublishedStatus::class)
-                ->default(PublishedStatus::PUBLISHED)
-                ->required(),
-            self::templatesField(),
-            Select::make('categories')
-                ->multiple()
-                ->relationship('categories', 'title')
-                ->searchable()
-                ->preload()
-                ->createOptionForm(CategoryResource::getGeneralSchema()),
-            FileUpload::make('image')
-                ->label('Image')
-                ->image(),
-        ];
+        return $form->schema([
+            Group::make()
+                ->schema([
+                    Group::make()
+                        ->schema([
+                            Tabs::make('Tabs')
+                                ->tabs([
+                                    Tabs\Tab::make('General')
+                                        ->schema([
+                                            TitleWithSlugInput::make(
+                                                fieldTitle: 'title',
+                                                fieldSlug: 'slug',
+                                            )->label('Title'),
+                                            Textarea::make('description')
+                                                ->rows(3)
+                                                ->required(),
+                                            FileUpload::make('image')
+                                                ->label('Image')
+                                                ->image(),
+                                        ])->afterStateUpdated(function ($get, $state, $set) {
+                                            if (class_has_trait(static::$model, HasMeta::class)) {
+                                                if (empty($get('meta.title')) && ! empty($state['title'])) {
+                                                    $set('meta.title', $state['title']);
+                                                }
+                                                if (empty($get('meta.description')) && ! empty($state['description'])) {
+                                                    $set('meta.description', $state['description']);
+                                                }
+                                                if (empty($get('meta.image')) && ! empty($state['image'])) {
+                                                    $set('meta.image', $state['image']);
+                                                }
+                                            }
+                                        })->live(),
+                                    Tabs\Tab::make('SEO')
+                                        ->schema([
+                                            Meta::make(),
+                                        ]),
+                                ]),
+                        ])
+                        ->columnSpan(['lg' => 2]),
+                    Group::make()
+                        ->schema([
+                            Section::make('Status')
+                                ->schema([
+                                    Toggle::make('is_visible')
+                                        ->label('Visible')
+                                        ->default(true),
+                                    DatePicker::make('published_at')
+                                        ->label('Publish Date')
+                                        ->default(now())
+                                        ->required(),
+                                ]),
+                            Section::make('Associations')
+                                ->schema([
+                                    Select::make('categories')
+                                        ->multiple()
+                                        ->relationship('categories', 'title')
+                                        ->searchable()
+                                        ->preload()
+                                        ->createOptionForm(CategoryResource::getGeneralSchema()),
+                                ]),
+                        ])
+                        ->columnSpan(['lg' => 1]),
+                ])->columns(3),
+            ...self::getTemplateSchemas(),
+        ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -87,8 +123,7 @@ class PostResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('status')
-                    ->badge(),
+                IsVisible::make('is_visible'),
             ])
             ->filters([])
             ->actions([

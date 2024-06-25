@@ -2,7 +2,6 @@
 
 namespace Database\Factories\Blog;
 
-use App\Enums\PublishedStatus;
 use App\Models\Blog\Category;
 use Database\Factories\Concerns\CanCreateImages;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,7 +24,7 @@ class CategoryFactory extends Factory
             'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->optional()->sentence,
             'image' => $this->createImage(),
-            'status' => PublishedStatus::PUBLISHED,
+            'is_visible' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ];

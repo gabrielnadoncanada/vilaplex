@@ -2,8 +2,7 @@
 
 namespace App\Models\Service;
 
-use App\Enums\PublishedStatus;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\HasMeta;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,29 +10,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Post extends Model
 {
     use HasFactory;
+    use HasMeta;
 
     protected $table = 'service_posts';
 
     protected $guarded = [];
 
     protected $casts = [
-        'status' => PublishedStatus::class,
+        'is_visible' => 'boolean',
+        'published_at' => 'datetime',
         'content' => 'array',
     ];
-
-    protected function slug(): Attribute
-    {
-        return Attribute::make(
-            get: function (string $value) {
-
-                if (filament()->isServing()) {
-                    return $value;
-                }
-
-                return route('service.show', $value);
-            },
-        );
-    }
 
     public function categories(): BelongsToMany
     {
@@ -42,6 +29,17 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('status', '!=', PublishedStatus::DRAFT);
+        return $query->where('is_visible', '!=', false)
+            ->where('published_at', '<=', now());
+    }
+
+    public function getBasePath(): string
+    {
+        return '/services/';
+    }
+
+    public function getPublicUrl()
+    {
+        return url()->to($this->getBasePath() . $this->slug . '/');
     }
 }

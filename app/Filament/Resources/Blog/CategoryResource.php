@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\Blog;
 
-use App\Enums\PublishedStatus;
+use App\Filament\Fields\IsVisible;
 use App\Filament\Fields\TitleWithSlugInput;
 use App\Filament\Resources\Blog\CategoryResource\Pages;
 use App\Models\Blog\Category;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -49,8 +49,8 @@ class CategoryResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('status')
-                    ->badge(),
+                IsVisible::make('is_visible'),
+
             ])
             ->filters([
                 //
@@ -76,17 +76,16 @@ class CategoryResource extends Resource
                 fieldTitle: 'title',
                 fieldSlug: 'slug',
             )->label('Title')->columnSpanFull(),
-            Select::make('status')
-                ->label(__('status'))
-                ->options(PublishedStatus::class)
-                ->default(PublishedStatus::PUBLISHED)
-                ->required(),
+
             Textarea::make('description')
                 ->rows(5)
                 ->columnSpan('full'),
             FileUpload::make('image')
                 ->label('Image')
                 ->image(),
+            Toggle::make('is_visible')
+                ->label('Visible')
+                ->default(true),
 
         ];
     }

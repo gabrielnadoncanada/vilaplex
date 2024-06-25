@@ -2,19 +2,17 @@
 
 namespace App\Filament\Resources\Service;
 
-use App\Enums\PublishedStatus;
 use App\Filament\Fields\TitleWithSlugInput;
 use App\Filament\Resources\Service\CategoryResource\Pages;
 use App\Models\Service\Category;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -62,7 +60,6 @@ class CategoryResource extends Resource
             ->actions([
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                    ReplicateAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),
             ])
@@ -78,18 +75,16 @@ class CategoryResource extends Resource
                 fieldTitle: 'title',
                 fieldSlug: 'slug',
             )->label('Title')->columnSpanFull(),
-            Select::make('status')
-                ->label(__('status'))
-                ->options(PublishedStatus::class)
-                ->default(PublishedStatus::PUBLISHED)
-                ->required(),
+
             Textarea::make('description')
                 ->rows(5)
                 ->columnSpan('full'),
             FileUpload::make('image')
                 ->label('Image')
                 ->image(),
-
+            Toggle::make('is_visible')
+                ->label('Visible')
+                ->default(true),
         ];
     }
 

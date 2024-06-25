@@ -1,4 +1,4 @@
-<div class="masonry-grid-item masonry-grid-item-33">
+<div {{$attributes->class(['masonry-grid-item'])}}>
     <x-card-item
         :badge="$badge"
         :image="$image"

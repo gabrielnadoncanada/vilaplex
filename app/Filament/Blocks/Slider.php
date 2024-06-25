@@ -2,22 +2,20 @@
 
 namespace App\Filament\Blocks;
 
-use App\Filament\Fields\UrlSelectionField;
+use App\Filament\Blocks\Fields\Buttons;
+use App\Filament\Blocks\Fields\Text;
+use App\Filament\Blocks\Fields\Heading;
+use App\Filament\Blocks\Fields\Image;
+use App\Filament\Blocks\Fields\Subtitle;
 use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 
 class Slider
 {
     public static function make(
         string $name = 'slider',
-        string $context = 'form',
     ): Block {
         return Block::make($name)
             ->schema([
@@ -33,21 +31,11 @@ class Slider
                                 ->reorderableWithButtons()
                                 ->columnSpanFull()
                                 ->schema([
-                                    TextInput::make('subtitle'),
-                                    Textarea::make('title'),
-                                    RichEditor::make('description'),
-                                    FileUpload::make('image')->image(),
-                                    Fieldset::make('primary action')
-                                        ->schema([
-                                            UrlSelectionField::make('primary_action')
-                                                ->columnSpanFull(),
-                                        ]),
-                                    Fieldset::make('secondary action')
-                                        ->schema([
-                                            UrlSelectionField::make('secondary_action')
-                                                ->columnSpanFull(),
-                                        ])
-                                        ->columnSpanFull(),
+                                    Subtitle::make(),
+                                    Heading::make(),
+                                    Text::make(),
+                                    Image::make(),
+                                    Buttons::make(),
                                 ]),
                         ]),
                     Tabs\Tab::make('Configuration')

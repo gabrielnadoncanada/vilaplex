@@ -2,52 +2,38 @@
 
 namespace App\Filament\Blocks;
 
+use App\Filament\Blocks\Fields\Buttons;
+use App\Filament\Blocks\Fields\Heading;
+use App\Filament\Blocks\Fields\Text;
+use App\Filament\Blocks\Fields\Subtitle;
 use App\Filament\Fields\UrlSelectionField;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 
 class Section
 {
     public static function make(
         string $name = 'section',
-        string $context = 'form',
     ): Block {
         return Block::make($name)
             ->schema([
-                TextInput::make('section_number'),
-                TextInput::make('subtitle'),
-                Textarea::make('title'),
-                Select::make('heading_level')
-                    ->label('Heading Level')
-                    ->options([
-                        'h4' => 'Small',
-                        'h3' => 'Medium',
-                        'h2' => 'Large',
-                        'h1' => 'Extra Large',
-                    ])
-                    ->default('medium'),
-                RichEditor::make('text'),
-                Fieldset::make('primary action')
-                    ->schema([
-                        UrlSelectionField::make('primary_action')
-                            ->columnSpanFull(),
-                    ]),
-                Fieldset::make('secondary action')
-                    ->schema([
-                        UrlSelectionField::make('secondary_action')
-                            ->columnSpanFull(),
-                    ]),
-
+                TextInput::make('section_number')
+                    ->default('01'),
+                Subtitle::make(),
+                Heading::make(),
+                Text::make(),
+                Buttons::make(),
                 Builder::make('blocks')
+                    ->collapsible()
+                    ->cloneable()
+                    ->collapsed()
                     ->blocks([
-                        MultiColumn::make(),
+                        OneColumn::make(),
+                        TwoColumn::make(),
                     ])
-                    ->addActionLabel('Add block')
                     ->collapsible(),
             ]);
     }

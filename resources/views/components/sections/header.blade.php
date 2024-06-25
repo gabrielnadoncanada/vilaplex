@@ -1,7 +1,7 @@
 <header>
     <div class="top-panel">
         <div class="logo-frame">
-            <a href="{{route('home')}}" class="default-link anima-link">
+            <a href="/" class="default-link anima-link">
                 <img class="logo" src="{{App\Models\DynamicConfig::getConfig('logo_dark')}}" alt="Mireya">
             </a>
         </div>

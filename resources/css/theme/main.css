@@ -156,14 +156,13 @@ a, a:hover {
 	font-size: 48px;
 	line-height: 66px;
 	font-weight: 900;
-    margin-bottom: 40px;
+
 }
 
 .h3 {
 	font-size: 32px;
 	line-height: 40px;
 	font-weight: 900;
-    margin-bottom: 20px;
 }
 
 .h4 {
@@ -939,7 +938,6 @@ html.is-animating .transition-fade .loading-curtain {
 
 .numbering {
 	text-align: center;
-	margin-bottom: 40px;
 }
 
 .numbering .subtitle {
@@ -1371,6 +1369,7 @@ html.is-animating .transition-fade .loading-curtain {
 .about-video .video-cover-frame .video-cover {
 	position: absolute;
 	width: 100%;
+    left: 0;
 	height: 100%;
 	object-fit: cover;
 	object-position: bottom;
@@ -1856,6 +1855,8 @@ blockquote:after {
 .grid-3-col .grid-sizer, .grid-3-col .masonry-grid-item {
 	width: 33.333%;
 }
+
+
 
 .masonry-grid-item {
 	float: left;
