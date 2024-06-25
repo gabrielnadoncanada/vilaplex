@@ -4,6 +4,7 @@
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #010d0d;
     color: transparent !important;
+    margin-bottom: 10px;
 }
 
 .subtitle {

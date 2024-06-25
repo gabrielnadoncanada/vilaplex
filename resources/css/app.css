@@ -1,6 +1,7 @@
 
 @import "./theme/fonts.css";
 @import "./theme/main.css";
+@import "./theme/partials/slider.css";
 @import "./theme/custom.css";
 @import "./theme/style-formats.css";
 

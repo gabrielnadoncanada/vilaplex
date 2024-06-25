@@ -1,4 +1,4 @@
-<div class="slider-nav-panel">
+<div {{$attributes->class(['slider-nav-panel'])}}>
     <div class="container">
         <div class="slider-progress-bar-frame">
             <div class="slider-progress-bar">

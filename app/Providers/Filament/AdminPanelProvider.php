@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use Devlense\FilamentAi\FilamentAiPlugin;
 use Filament\FontProviders\GoogleFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -69,14 +70,4 @@ class AdminPanelProvider extends PanelProvider
             ]);
     }
 
-    public function register(): void
-    {
-        parent::register();
-
-        $this->app->resolving('filament', function () {
-            FilamentAsset::register([
-                Js::make('filament-menu', resource_path('dist/filament-menu.js')),
-            ]);
-        });
-    }
 }

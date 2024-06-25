@@ -33,6 +33,7 @@ class Section
                     ->blocks([
                         OneColumn::make(),
                         TwoColumn::make(),
+                        Slider::make()
                     ])
                     ->collapsible(),
             ]);

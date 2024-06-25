@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Filament\TiptapBlock\BatmanBlock;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Support\Assets\Css;
@@ -21,7 +22,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-
+use FilamentTiptapEditor\TiptapEditor;
 class FilamentServiceProvider extends ServiceProvider
 {
     public function boot(): void
@@ -35,15 +36,25 @@ class FilamentServiceProvider extends ServiceProvider
             Css::make('filament-title-with-slug-styles', __DIR__ . '/../../resources/dist/filament-title-with-slug.css'),
             Css::make('style-format', __DIR__ . '/../../resources/css/theme/style-formats.css'),
             Js::make('tinymce', 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/tinymce.min.js'),
+            Js::make('filament-menu', resource_path('dist/filament-menu.js')),
         ]);
+
+
+
+        TiptapEditor::configureUsing(function (TiptapEditor $component) {
+            $component
+                ->blocks([
+                    BatmanBlock::class,
+                ]);
+        });
     }
 
     protected function configureTable(): void
     {
         Table::configureUsing(
-            fn (Table $table) => $table
+            fn(Table $table) => $table
                 ->filtersTriggerAction(
-                    fn (Action $action) => $action
+                    fn(Action $action) => $action
                         ->button()
                         ->label('Filtres'),
                 )->filtersFormWidth('2xl')
@@ -118,8 +129,8 @@ class FilamentServiceProvider extends ServiceProvider
 
         Forms\Components\Repeater::configureUsing(function ($component) {
             $component
-                ->collapseAllAction(fn ($action) => $action->icon('heroicon-o-arrows-pointing-in'))
-                ->expandAllAction(fn ($action) => $action->icon('heroicon-o-arrows-pointing-out'));
+                ->collapseAllAction(fn($action) => $action->icon('heroicon-o-arrows-pointing-in'))
+                ->expandAllAction(fn($action) => $action->icon('heroicon-o-arrows-pointing-out'));
         });
 
         Forms\Components\RichEditor::configureUsing(function ($component) {
@@ -167,7 +178,7 @@ class FilamentServiceProvider extends ServiceProvider
     {
         Filament::registerRenderHook(
             'panels::body.start',
-            fn (): View => view('components.staging-banner'),
+            fn(): View => view('components.staging-banner'),
         );
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Filament\Templates;
 
 use App\Filament\Blocks\Banner;
+use App\Filament\Blocks\Content;
 use App\Filament\Blocks\Section;
+use App\Filament\Blocks\Slider;
 use App\Filament\Blocks\Video;
 use Filament\Forms\Components\Builder;
 use Pboivin\FilamentPeek\Forms\Actions\InlinePreviewAction;
@@ -34,7 +36,6 @@ final class Single
             \Filament\Forms\Components\Section::make('Content')
                 ->collapsible()
                 ->collapsed()
-
                 ->schema([
                     Builder::make('content_section')
                         ->cloneable()
@@ -43,7 +44,7 @@ final class Single
                         ->blocks([
                             Section::make(),
                             Video::make(),
-
+                            Slider::make()
                         ]),
                 ]),
             \Filament\Forms\Components\Section::make('Footer')

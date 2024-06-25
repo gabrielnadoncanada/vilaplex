@@ -2,54 +2,12 @@
 
     'use strict';
 
-    // parsely validation
-    // $('#form').parsley();
-
-    // clear parsley empty elements
-    // if ($('#form').length > 0) {
-    //     $('#form').parsley().on('field:success', function () {
-    //         $('ul.parsley-errors-list').not(':has(li)').remove();
-    //     });
-    // }
-
     $(document).ready(function () {
         $('html').removeClass('is-animating');
     });
 
 
-    // Scrollbar.use(OverscrollPlugin);
-    // var scrollbar = Scrollbar.init(document.querySelector('#scroll'), {
-    //     damping: 0.07,
-    //     renderByPixel: true,
-    //     continuousScrolling: true,
-    //     plugins: {
-    //         overscroll: {
-    //             effect: 'bounce',
-    //             damping: 0.15,
-    //             maxOverscroll: 80
-    //         },
-    //         mobile: {
-    //             speed: 0.2,
-    //             alwaysShowTracks: false
-    //         }
-    //     },
-    // });
     var header = $(".top-panel"); // Select the header by its ID
-    var stickyZone = 100; // Set the scroll position where the class should be added
-    // Listen to the scroll event of the custom scrollbar
-    // scrollbar.addListener(function(status) {
-    //     var scrollOffset = status.offset.y; // Get the vertical scroll position
-    //
-    //     if (scrollOffset > stickyZone) {
-    //         header.addClass('sticky'); // Add the class if scrolled beyond the stickyZone
-    //     } else {
-    //         header.removeClass('sticky'); // Remove the class if scrolled to the top
-    //     }
-    // });
-    //
-    // $('.scroll-hint').on('click', function () {
-    //     scrollbar.scrollTo(0, 550, 1800);
-    // });
 
     // portfolio filter
     $('.filter a').on('click', function () {
@@ -231,7 +189,7 @@
     // sliders
     var progressbar = $(".slider-progress-bar");
 
-    var swiper = new Swiper(".main-slider", {
+    var swiper = new Swiper(".slider-template-full-screen .swiper-container", {
         autoplay: {
             delay: 10000,
             disableOnInteraction: false
@@ -270,7 +228,7 @@
         }
     });
 
-    var swiper = new Swiper(".team-slider", {
+    var swiper = new Swiper(".slider-template-horizontal-1  .swiper-container", {
         slidesPerView: 3,
         spaceBetween: 30,
         loop: true,
@@ -286,7 +244,7 @@
         },
     });
 
-    var swiper = new Swiper(".testimonials-slider", {
+    var swiper = new Swiper(".slider-template-horizontal-2  .swiper-container", {
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,

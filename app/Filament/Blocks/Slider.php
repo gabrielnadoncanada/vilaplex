@@ -9,6 +9,7 @@ use App\Filament\Blocks\Fields\Image;
 use App\Filament\Blocks\Fields\Subtitle;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Toggle;
 
@@ -40,6 +41,11 @@ class Slider
                         ]),
                     Tabs\Tab::make('Configuration')
                         ->schema([
+                            Select::make('template')
+                            ->options([
+                                'full-screen' => 'Full Screen',
+                                'horizontal-1' => 'Horizontal 1',
+                            ]),
                             Toggle::make('pagination')
                                 ->label('Activate Pagination')
                                 ->default(true),
