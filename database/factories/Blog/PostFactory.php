@@ -17,7 +17,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'slug' => $this->faker->unique()->slug,
-            'description' => $this->faker->sentence,
+            'text' => $this->faker->sentence,
             'published_at' => now(),
             'content' => $this->faker->optional()->text,
             'is_visible' => true,

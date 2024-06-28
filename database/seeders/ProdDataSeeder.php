@@ -40,13 +40,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Gestion financière',
                 'slug' => 'gestion-financiere',
-                'description' => 'Supervision des finances de vos propriétés, incluant facturation, loyers, et optimisation des rendements immobiliers.',
+                'text' => 'Supervision des finances de vos propriétés, incluant facturation, loyers, et optimisation des rendements immobiliers.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'Service',
+                                'subtitle_text' => 'Service',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Gestion\nfinancière",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -62,13 +63,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Gestion administrative',
                 'slug' => 'gestion-administrative',
-                'description' => 'Coordination et supervision des tâches administratives pour votre propriété, incluant gestion des locataires et contrats.',
+                'text' => 'Coordination et supervision des tâches administratives pour votre propriété, incluant gestion des locataires et contrats.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'Service',
+                                'subtitle_text' => 'Service',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Gestion\nadministrative",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -84,13 +86,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Gestion opérationnelle',
                 'slug' => 'gestion-operationnelle',
-                'description' => 'Organisation quotidienne de la propriété, de la maintenance à la gestion locative, pour un fonctionnement optimal.',
+                'text' => 'Organisation quotidienne de la propriété, de la maintenance à la gestion locative, pour un fonctionnement optimal.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'Service',
+                                'subtitle_text' => 'Service',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Gestion\nopérationnelle",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -110,7 +113,7 @@ class ProdDataSeeder extends Seeder
             ServicePost::create([
                 'title' => $post['title'],
                 'slug' => $post['slug'],
-                'description' => $post['description'],
+                'text' => $post['text'],
                 'image' => $this->createDefaultImage(),
                 'content' => $post['content'] ?? [],
             ]);
@@ -133,7 +136,8 @@ class ProdDataSeeder extends Seeder
                 'data' => [
                     'slides' => [
                         [
-                            'subtitle' => 'Service',
+                            'subtitle_text' => 'Service',
+                            'subtitle_level' => 'span',
                             'heading_text' => "Gestion\nadministrative",
                             'heading_level' => 'h2',
                             'heading_size' => 'h1',
@@ -165,7 +169,8 @@ class ProdDataSeeder extends Seeder
                             ]
                         ],
                         [
-                            'subtitle' => 'Service',
+                            'subtitle_text' => 'Service',
+                            'subtitle_level' => 'span',
                             'heading_text' => "Gestion\nfinancière",
                             'heading_level' => 'h2',
                             'heading_size' => 'h1',
@@ -197,7 +202,8 @@ class ProdDataSeeder extends Seeder
                             ]
                         ],
                         [
-                            'subtitle' => 'Service',
+                            'subtitle_text' => 'Service',
+                            'subtitle_level' => 'span',
                             'heading_text' => "Gestion\nopérationnelle",
                             'heading_level' => 'h2',
                             'heading_size' => 'h1',
@@ -230,7 +236,8 @@ class ProdDataSeeder extends Seeder
                         ]
                     ],
                     'pagination' => true,
-                    'navigation' => true
+                    'navigation' => true,
+                    'template' => 'full-screen'
                 ]
             ]
         ];
@@ -243,7 +250,8 @@ class ProdDataSeeder extends Seeder
             [
                 'type' => 'banner',
                 'data' => [
-                    'subtitle' => 'Contact',
+                    'subtitle_text' => 'Contact',
+                    'subtitle_level' => 'h2',
                     'heading_text' => "Avez-vous\nun projet ?",
                     'heading_level' => 'h2',
                     'heading_size' => 'h1',
@@ -274,7 +282,7 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Accueil',
                 'slug' => 'accueil',
-                'description' => 'Bienvenue sur notre site web.',
+                'text' => 'Bienvenue sur notre site web.',
                 'content' => [
                     'header_section' => $this->seedHomeSlider(),
                 ],
@@ -282,13 +290,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Services',
                 'slug' => 'services',
-                'description' => 'Contactez-nous pour plus d\'informations.',
+                'text' => 'Contactez-nous pour plus d\'informations.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'Services',
+                                'subtitle_text' => 'Services',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Lorem ipsum dolor\nsit amet",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -306,7 +315,7 @@ class ProdDataSeeder extends Seeder
                                 'columns' => 33,
                                 'type' => 'dynamic',
                                 'show_title' => true,
-                                'show_description' => true,
+                                'show_text' => true,
                                 'show_image' => true,
                                 'show_lightbox' => true,
                                 'dynamic_type' => 'App\\Models\\Service\\Post',
@@ -324,13 +333,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Blogue',
                 'slug' => 'blogue',
-                'description' => 'Contactez-nous pour plus d\'informations.',
+                'text' => 'Contactez-nous pour plus d\'informations.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'Blogue',
+                                'subtitle_text' => 'Blogue',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Lorem ipsum dolor\nsit amet",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -348,7 +358,7 @@ class ProdDataSeeder extends Seeder
                                 'columns' => 33,
                                 'type' => 'dynamic',
                                 'show_title' => true,
-                                'show_description' => true,
+                                'show_text' => true,
                                 'show_image' => true,
                                 'show_lightbox' => true,
                                 'dynamic_type' => 'App\\Models\\Blog\\Post',
@@ -366,13 +376,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'Contact',
                 'slug' => 'contact',
-                'description' => 'Contactez-nous pour plus d\'informations.',
+                'text' => 'Contactez-nous pour plus d\'informations.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'Contact',
+                                'subtitle_text' => 'Contact',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Lorem ipsum\ndolor sit amet\n",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -389,13 +400,14 @@ class ProdDataSeeder extends Seeder
             [
                 'title' => 'À propos',
                 'slug' => 'a-propos',
-                'description' => 'Découvrez notre entreprise.',
+                'text' => 'Découvrez notre entreprise.',
                 'content' => [
                     'header_section' => [
                         [
                             'type' => 'banner',
                             'data' => [
-                                'subtitle' => 'À propos',
+                                'subtitle_text' => 'À propos',
+                                'subtitle_level' => 'span',
                                 'heading_text' => "Lorem ipsum \ndolor sit amet",
                                 'heading_level' => 'h1',
                                 'heading_size' => 'h1',
@@ -415,7 +427,7 @@ class ProdDataSeeder extends Seeder
             Page::create([
                 'title' => $page['title'],
                 'slug' => $page['slug'],
-                'description' => $page['description'],
+                'text' => $page['text'],
                 'image' => $this->createDefaultImage(),
                 'content' => $page['content'] ?? '[]',
             ]);

@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
         return [
             'title' => $this->faker->word,
             'slug' => $this->faker->unique()->slug,
-            'description' => $this->faker->optional()->sentence,
+            'text' => $this->faker->optional()->sentence,
             'image' => $this->createImage(),
             'is_visible' => true,
             'created_at' => now(),

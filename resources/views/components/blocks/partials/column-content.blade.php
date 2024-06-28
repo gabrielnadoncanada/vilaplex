@@ -1,5 +1,6 @@
 @props([
-    'subtitle' => null,
+    'subtitle_text' => null,
+    'subtitle_level' => 'span',
     'text' => null,
     'buttons' => [],
     'heading_level' => 'h2',
@@ -8,7 +9,8 @@
 ])
 <div {{$attributes}}>
     <x-blocks.fields.subtitle
-        :subtitle="$subtitle"
+        :subtitle_text="$subtitle_text"
+        :subtitle_level="$subtitle_level"
     />
     <x-blocks.fields.heading
         :heading_level="$heading_level"

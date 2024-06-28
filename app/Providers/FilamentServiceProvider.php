@@ -38,15 +38,6 @@ class FilamentServiceProvider extends ServiceProvider
             Js::make('tinymce', 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/tinymce.min.js'),
             Js::make('filament-menu', resource_path('dist/filament-menu.js')),
         ]);
-
-
-
-        TiptapEditor::configureUsing(function (TiptapEditor $component) {
-            $component
-                ->blocks([
-                    BatmanBlock::class,
-                ]);
-        });
     }
 
     protected function configureTable(): void
@@ -109,10 +100,6 @@ class FilamentServiceProvider extends ServiceProvider
         TextColumn::configureUsing(function (TextColumn $column): void {
             $column->searchable();
         });
-
-        ImageColumn::configureUsing(function (ImageColumn $column): void {
-            //            $column->disk(config('filesystems.default'))->visibility('private');
-        }, isImportant: true);
     }
 
     protected function configureForm(): void

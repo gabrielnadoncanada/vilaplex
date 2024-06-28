@@ -1,6 +1,6 @@
 <div class="{{"slider-template-$template"}}">
     @if($template != 'full-screen')
-        <x-blocks.partials.slider.navigation class="p-0-40"/>
+        <x-blocks.partials.slider.navigation class="pb-10"/>
     @endif
     <div class="swiper-container ">
         <div class="swiper-wrapper">
@@ -25,7 +25,8 @@
                                          data-swiper-parallax-scale=".7" data-swiper-parallax-opacity="0"
                                          data-swiper-parallax-duration="1000">
                                         <x-blocks.fields.subtitle
-                                            :subtitle="$slide['subtitle']"
+                                            :subtitle_text="$slide['subtitle_text']"
+                                            :subtitle_level="$slide['subtitle_level']"
                                         />
                                         <x-blocks.fields.heading
                                             :heading_level="$slide['heading_level']"

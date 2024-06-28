@@ -2,7 +2,7 @@
     <div class="footer-copy">
         <div class="container-fluid">
             <div class="container">
-                <div class="row justify-content-between">
+                <div class="flex justify-between">
                     <div>{{config('app.name')}} © {{date('Y')}}</div>
                     {{--            <ul class="social">--}}
                     {{--                <li><a href="#."><i class="fab fa-facebook-f"></i></a></li>--}}
@@ -18,7 +18,3 @@
     </div>
 </footer>
 
-<div class="head-bg head-bottom">
-    <img src="img/light/projects/prjct-5/1.jpg" alt="background">
-    <div class="bg-overlay"></div>
-</div>

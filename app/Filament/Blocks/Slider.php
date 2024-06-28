@@ -17,8 +17,8 @@ class Slider
 {
     public static function make(
         string $name = 'slider',
-    ): Block {
-        return Block::make($name)
+    ): ConfigurableBlock {
+        return ConfigurableBlock::make($name)
             ->schema([
                 Tabs::make()->tabs([
                     Tabs\Tab::make('Slides')

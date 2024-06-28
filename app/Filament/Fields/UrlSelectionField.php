@@ -51,6 +51,7 @@ class UrlSelectionField extends Forms\Components\Field
         return Group::make()
             ->statePath('data')
             ->whenTruthy('type')
+
             ->schema(fn (Get $get) => $this->getItemTypes()[$get('type')]['fields'] ?? []);
     }
 

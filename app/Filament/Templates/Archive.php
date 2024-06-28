@@ -25,7 +25,7 @@ final class Archive
                 ->schema([
                     Builder::make('header_section')
                         ->blocks([
-                            Banner::make()
+                            Banner::make('banner')
                                 ->maxItems(1),
                         ])
                         ->default([['type' => 'banner', 'data' => []]])
@@ -53,7 +53,7 @@ final class Archive
                 ->schema([
                     Builder::make('footer_section')
                         ->blocks([
-                            Banner::make()
+                            Banner::make('banner')
                                 ->maxItems(1),
                         ])
                         ->default([['type' => 'banner', 'data' => []]]),

@@ -24,10 +24,13 @@
 @endif
 <div class="app">
     <x-header/>
-    <div class="transition-fade">
+    <main class="transition-fade">
         <canvas class="dots" width="835" height="1347" style="display: none;"></canvas>
         {{ $slot }}
-    </div>
+    </main>
+    @if(request()->path() !== '/')
+        <x-footer/>
+    @endif
 </div>
 
 

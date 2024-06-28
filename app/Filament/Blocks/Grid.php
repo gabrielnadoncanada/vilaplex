@@ -52,7 +52,7 @@ class Grid
                                 Checkbox::make('show_title')
                                     ->label('Show Title')
                                     ->default(true),
-                                Checkbox::make('show_description')
+                                Checkbox::make('show_text')
                                     ->label('Show description')
                                     ->default(true),
                                 Checkbox::make('show_image')

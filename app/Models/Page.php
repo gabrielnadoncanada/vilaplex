@@ -51,17 +51,28 @@ class Page extends Model
         return url()->to($this->getBasePath() . $this->slug . '/');
     }
 
+    public function isHomePage(): bool
+    {
+        return app(ThemeSettings::class)->site_home_page_id == $this->id;
+    }
+
+    public function isArchivePage(): bool
+    {
+        return app(ThemeSettings::class)->site_blog_page_id == $this->id
+            || app(ThemeSettings::class)->site_service_page_id == $this->id;
+    }
+
     public function template(): string
     {
-        if (app(ThemeSettings::class)->site_home_page_id == $this->id) {
+        if ($this->isHomePage()) {
             return Home::class;
         }
 
-        if (app(ThemeSettings::class)->site_blog_page_id == $this->id
-            || app(ThemeSettings::class)->site_service_page_id == $this->id) {
+        if ($this->isArchivePage()) {
             return Archive::class;
         }
 
         return Single::class;
     }
+
 }

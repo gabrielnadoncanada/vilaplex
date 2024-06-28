@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unique(['metaable_id', 'metaable_type']);
             $table->string('title');
-            $table->text('description');
+            $table->text('text');
             $table->boolean('indexable')->default(true);
             $table->string('image')->nullable();
             $table->integer('metaable_id');

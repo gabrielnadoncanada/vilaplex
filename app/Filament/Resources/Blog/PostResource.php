@@ -60,7 +60,7 @@ class PostResource extends Resource
                                                 fieldTitle: 'title',
                                                 fieldSlug: 'slug',
                                             )->label('Title'),
-                                            Textarea::make('description')
+                                            Textarea::make('text')
                                                 ->rows(3)
                                                 ->required(),
                                             FileUpload::make('image')
@@ -71,8 +71,8 @@ class PostResource extends Resource
                                                 if (empty($get('meta.title')) && ! empty($state['title'])) {
                                                     $set('meta.title', $state['title']);
                                                 }
-                                                if (empty($get('meta.description')) && ! empty($state['description'])) {
-                                                    $set('meta.description', $state['description']);
+                                                if (empty($get('meta.text')) && ! empty($state['text'])) {
+                                                    $set('meta.text', $state['text']);
                                                 }
                                                 if (empty($get('meta.image')) && ! empty($state['image'])) {
                                                     $set('meta.image', $state['image']);

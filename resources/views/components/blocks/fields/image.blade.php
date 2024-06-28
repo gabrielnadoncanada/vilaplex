@@ -1,7 +1,5 @@
 @props(['image' => null])
 
 @if($image)
-    <div {{ $attributes->merge(['class' => 'image']) }}>
-        <img src="{{ Storage::url($image) }}" alt="">
-    </div>
+    <img {{ $attributes->merge(['class' => 'image']) }} src="{{ Storage::url($image) }}" alt="">
 @endif

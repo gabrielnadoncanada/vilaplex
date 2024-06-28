@@ -77,7 +77,7 @@ class CategoryResource extends Resource
                 fieldSlug: 'slug',
             )->label('Title')->columnSpanFull(),
 
-            Textarea::make('description')
+            Textarea::make('text')
                 ->rows(5)
                 ->columnSpan('full'),
             FileUpload::make('image')

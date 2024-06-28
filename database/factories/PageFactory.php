@@ -14,7 +14,7 @@ class PageFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'slug' => $this->faker->unique()->slug,
-            'description' => $this->faker->sentence,
+            'text' => $this->faker->sentence,
             'content' => $this->faker->optional()->text,
             'is_visible' => true,
             'published_at' => now(),

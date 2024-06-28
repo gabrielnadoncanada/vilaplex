@@ -13,7 +13,7 @@ trait HasMeta
             if (! $model->meta) {
                 $model->meta()->create([
                     'title' => $model->title,
-                    'description' => $model->description,
+                    'text' => $model->text,
                     'image' => $model->image,
                 ]);
             }

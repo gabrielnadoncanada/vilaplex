@@ -12,6 +12,14 @@ module.exports = {
                 'wide': '1200px',
             },
         },
+        screens: {
+            'sm': '576px',
+            'md': '768px',
+            'lg': '992px',
+            'xl': '1024px',
+            '2xl': '1200px',
+            '3xl': '1400px',
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),

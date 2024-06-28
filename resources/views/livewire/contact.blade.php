@@ -1,6 +1,6 @@
 <div>
-    <x-form wire:submit.prevent="submit" id="form" class="form mb-100">
-        <div class="row">
+    <x-form wire:submit.prevent="submit" id="form" class="form mb-[100px]">
+        <div class="flex">
             <div class="col-lg-6">
                 <x-form.label class="label fo"
                               for="firstName">{{__('app.contact.form.first_name')}}</x-form.label>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="flex">
             <div class="col-lg-6">
                 <x-form.label class="label fo" for="email">{{__('app.contact.form.email')}}</x-form.label>
                 <div class="fo">
@@ -48,7 +48,7 @@
         <div class="fade-object">
             <x-form.label class="label fo" for="message">{{__('app.contact.form.message')}}</x-form.label>
             <div class="fo">
-                <x-form.textarea id="message" wire:model="message" rows="8" cols="80"
+                <x-form.textarea id="message" wire:model="message" flexs="8" cols="80"
                                  placeholder="{{__('app.contact.form.message_placeholder')}}"
                                  class="default-link"
                                  type="text"
@@ -56,11 +56,11 @@
                 <x-form.error for="message"></x-form.error>
             </div>
         </div>
-        <div class="row align-items-center">
+        <div class="flex align-items-center">
             <div class="col-lg-12">
-                <div class="fo mx-auto row justify-content-center ">
+                <div class="fo mx-auto flex justify-center ">
                     <button type="submit"
-                            class="btn default-link mb-20">{{__('app.contact.form.send_message')}}</button>
+                            class="btn default-link mb-[20px]">{{__('app.contact.form.send_message')}}</button>
                 </div>
             </div>
 

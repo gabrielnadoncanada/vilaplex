@@ -11,7 +11,7 @@ class Meta extends Model
 
     protected $fillable = [
         'title',
-        'description',
+        'text',
         'indexable',
         'image',
     ];

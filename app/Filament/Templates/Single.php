@@ -27,6 +27,12 @@ final class Single
                     Builder::make('header_section')
                         ->blocks([
                             Banner::make()
+                                ->configureField('heading_level', function ($heading) {
+                                    return $heading->default('h1')->hidden();
+                                })
+                                ->configureField('heading_size', function ($heading) {
+                                    return $heading->default('h1')->hidden();
+                                })
                                 ->maxItems(1),
                         ])
                         ->default([['type' => 'banner', 'data' => []]])
@@ -54,6 +60,15 @@ final class Single
                     Builder::make('footer_section')
                         ->blocks([
                             Banner::make()
+                                ->configureField('subtitle_level', function ($heading) {
+                                    return $heading->default('h2');
+                                })
+                                ->configureField('heading_level', function ($heading) {
+                                    return $heading->default('h3')->hidden();
+                                })
+                                ->configureField('heading_size', function ($heading) {
+                                    return $heading->default('h1')->hidden();
+                                })
                                 ->maxItems(1),
                         ])
                         ->default([['type' => 'banner', 'data' => []]]),

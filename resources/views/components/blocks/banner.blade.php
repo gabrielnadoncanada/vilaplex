@@ -8,7 +8,8 @@
             <div class="row justify-content-center">
                 <div class="main-title d-grid row-gap-4 title-center">
                     <x-blocks.fields.subtitle
-                        :subtitle="$subtitle"
+                        :subtitle_text="$subtitle_text"
+                        :subtitle_level="$subtitle_level"
                     />
                     <x-blocks.fields.heading
                         :split="true"
@@ -18,7 +19,7 @@
                     />
                     <x-blocks.fields.text
                         :text="$text"
-                        class="fo max-w-450px mx-auto"
+                        class="max-w-450px mx-auto"
                     />
                     <x-blocks.fields.buttons
                         :buttons="$buttons"

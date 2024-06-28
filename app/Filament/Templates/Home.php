@@ -26,6 +26,12 @@ final class Home
                     Builder::make('header_section')
                         ->blocks([
                             Slider::make()
+                                ->configureField('heading_level', function ($heading) {
+                                    return $heading->default('h2')->hidden();
+                                })
+                                ->configureField('heading_size', function ($heading) {
+                                    return $heading->default('h1')->hidden();
+                                })
                                 ->maxItems(1),
                         ])
                         ->deletable(false),

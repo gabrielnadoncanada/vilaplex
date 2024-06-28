@@ -26,6 +26,7 @@
         filter: '*',
         itemSelector: '.masonry-grid-item',
         percentPosition: true,
+        layoutMode: 'fitRows',
         masonry: {
             columnWidth: '.grid-sizer'
         }
