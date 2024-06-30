@@ -8,27 +8,23 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('form_entries', function (Blueprint $table) {
+        Schema::create('form_fields', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('form_id')->constrained()->onDelete('cascade');
+            $table->string('type');
+            $table->longText('settings')->nullable();
             $table->timestamps();
-            $table->string('name');
-            $table->string('email');
-            $table->text('message');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('form_entries');
+        Schema::dropIfExists('metas');
     }
 };

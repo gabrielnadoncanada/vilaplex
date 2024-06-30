@@ -22,5 +22,7 @@ return new class extends SettingsMigration
         $this->migrator->add('theme.site_address', '');
         $this->migrator->add('theme.site_email', '');
         $this->migrator->add('theme.site_phone', '');
+        $this->migrator->add('theme.facebook_url', '');
+        $this->migrator->add('theme.instagram_url', '');
     }
 };
