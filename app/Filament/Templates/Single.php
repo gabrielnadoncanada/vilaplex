@@ -3,7 +3,7 @@
 namespace App\Filament\Templates;
 
 use App\Filament\Blocks\Banner;
-use App\Filament\Blocks\Content;
+use App\Filament\Blocks\Form;
 use App\Filament\Blocks\Section;
 use App\Filament\Blocks\Slider;
 use App\Filament\Blocks\Video;
@@ -50,7 +50,8 @@ final class Single
                         ->blocks([
                             Section::make(),
                             Video::make(),
-                            Slider::make()
+                            Slider::make(),
+                            Form::make()
                         ]),
                 ]),
             \Filament\Forms\Components\Section::make('Footer')

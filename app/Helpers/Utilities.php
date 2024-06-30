@@ -2,16 +2,12 @@
 
 use Spatie\Ray\Settings\Settings;
 
-//if (!function_exists('settings')) {
-//  function settings($key = null, $default = null)
-//  {
-//    if ($key === null) {
-//      return app(App\Utils\Settings::class);
-//    }
-//
-//    return app(App\Utils\Settings::class)->get($key, $default);
-//  }
-//}
+if (!function_exists('theme')) {
+    function theme($key)
+    {
+        return app(App\Settings\ThemeSettings::class)->$key;
+    }
+}
 
 if (! function_exists('checked')) {
     function checked($value, $test)

@@ -2,43 +2,50 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContactEntryResource\Pages;
+
+use App\Filament\Resources\FormEntryResource\Pages;
 use App\Models\FormEntry;
-use Filament\Infolists;
-use Filament\Infolists\Infolist;
+use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\HtmlString;
 
 class FormEntryResource extends Resource
 {
+    protected static ?string $label = 'message';
+
+    protected static ?string $pluralLabel = 'messages';
+
     protected static ?string $model = FormEntry::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
-
-    protected static bool $shouldRegisterNavigation = false;
-
-    protected static ?int $navigationSort = 1;
-
     protected static ?string $navigationGroup = 'Site';
+    protected static ?int $navigationSort = 2;
 
-    public static function infolist(Infolist $infolist): Infolist
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function form(Form $form): Form
     {
-        return $infolist->schema([
-            Infolists\Components\TextEntry::make('created_at')
-                ->label('Date')
-                ->columnSpanFull(),
+        return $form->schema([
+            Section::make('Informations')
+            ->schema([
+                Forms\Components\TextInput::make('firstName')
+                    ->disabled()
+                    ->label('Prénom'),
+                Forms\Components\TextInput::make('lastName')
+                    ->disabled()
+                    ->label('Nom'),
+                Forms\Components\TextInput::make('email')
+                    ->disabled()
+                    ->label('Courriel'),
+                Forms\Components\TextInput::make('tel')
+                    ->disabled()
+                    ->label('Téléphone'),
+                Forms\Components\Textarea::make('message')
+                    ->disabled()
+                    ->label('Message'),
+            ])
 
-            Infolists\Components\TextEntry::make('name')
-                ->columnSpanFull(),
-
-            Infolists\Components\TextEntry::make('email')
-                ->columnSpanFull(),
-
-            Infolists\Components\TextEntry::make('message')
-                ->formatStateUsing(fn ($state) => new HtmlString(nl2br($state)))
-                ->columnSpanFull(),
         ]);
     }
 
@@ -46,30 +53,44 @@ class FormEntryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Date')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('name')->sortable(),
-                Tables\Columns\TextColumn::make('email')->sortable(),
+                Tables\Columns\TextColumn::make('firstName')
+                    ->label('Prénom'),
+                Tables\Columns\TextColumn::make('lastName')
+                    ->label('Nom'),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Courriel'),
+                Tables\Columns\TextColumn::make('tel')
+                    ->label('Téléphone')
+            ])
+            ->filters([
+                // ... your filters
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ])
-            ->defaultSort('created_at', 'desc');
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Resources\FormEntryResource\Pages\ListFormEntries::route('/'),
-            'view' => \App\Filament\Resources\FormEntryResource\Pages\ViewFormEntry::route('/{record}'),
-            // 'create' => Pages\CreateContactEntry::route('/create'),
-            // 'edit' => Pages\EditContactEntry::route('/{record}/edit'),
+            'index' => Pages\ListFormEntries::route('/'),
+            'create' => Pages\CreateFormEntry::route('/create'),
+            'edit' => Pages\EditFormEntry::route('/{record}/edit'),
         ];
     }
 }

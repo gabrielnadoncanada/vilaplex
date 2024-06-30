@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
+use App\Mail\MessageCreatedMail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class FormEntry extends Model
 {
-    protected $fillable = ['form_id', 'data'];
+    protected $guarded = [];
 
-    protected $casts = [
-        'data' => 'array',
-    ];
-
-    public function form()
+    protected static function booted()
     {
-        return $this->belongsTo(Form::class);
+        static::created(function ($item) {
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new MessageCreatedMail($item));
+        });
     }
 }

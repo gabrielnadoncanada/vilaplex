@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('form_entries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->constrained()->onDelete('cascade');
-            $table->longText('data');
+            $table->timestamps();
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->string('email');
+            $table->string('tel');
+            $table->longText('message');
         });
     }
 

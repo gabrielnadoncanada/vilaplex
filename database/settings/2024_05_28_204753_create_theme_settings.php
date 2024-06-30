@@ -16,12 +16,12 @@ return new class extends SettingsMigration
         $this->migrator->add('theme.site_logo', Storage::disk('public')->putFile(public_path(config('seeding.logo_placeholder_path'))));
         $this->migrator->add('theme.header_menu_id', 1);
         $this->migrator->add('theme.footer_menu_id', 1);
-        $this->migrator->add('theme.site_country', '');
-        $this->migrator->add('theme.site_state', '');
-        $this->migrator->add('theme.site_city', '');
-        $this->migrator->add('theme.site_address', '');
-        $this->migrator->add('theme.site_email', '');
-        $this->migrator->add('theme.site_phone', '');
+        $this->migrator->add('theme.site_country', 'Canada');
+        $this->migrator->add('theme.site_state', 'Québec');
+        $this->migrator->add('theme.site_city', 'Toronto');
+        $this->migrator->add('theme.site_address', '1234 Street Name');
+        $this->migrator->add('theme.site_email', 'mireya.inbox@mail.com');
+        $this->migrator->add('theme.site_phone', '+4 9(054) 996 84 25');
         $this->migrator->add('theme.facebook_url', '');
         $this->migrator->add('theme.instagram_url', '');
     }

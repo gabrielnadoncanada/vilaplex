@@ -19,70 +19,79 @@
 <header>
 
 
-<div class="top-panel">
-    <div class="logo-frame">
-        <a href="/" class="default-link anima-link">
-            @if(app(App\Settings\ThemeSettings::class)->site_logo)
-                <img class="logo" src="{{Storage::url(app(App\Settings\ThemeSettings::class)->site_logo)}}"
-                     alt="Mireya">
-            @endif
-        </a>
-    </div>
-    <div class="menu-button-frame">
-        <div class="menu-btn magnetic-link">
-            <div class="burger magnetic-object">
-                <span></span>
+    <div class="top-panel">
+        <div class="logo-frame">
+            <a href="/" class="default-link anima-link">
+                @if(app(App\Settings\ThemeSettings::class)->site_logo)
+                    <img class="logo" src="{{Storage::url(app(App\Settings\ThemeSettings::class)->site_logo)}}"
+                         alt="Mireya">
+                @endif
+            </a>
+        </div>
+        <div class="menu-button-frame">
+            <div class="menu-btn magnetic-link">
+                <div class="burger magnetic-object">
+                    <span></span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="menu">
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-md-4">
-                <nav id="dynamic-menu">
-                    @php
-                        $menu =  App\Models\Navigation::find(app(App\Settings\ThemeSettings::class)->header_menu_id);
-                    @endphp
-                    @if($menu)
-                        <x-menu :items="$menu->items"/>
-                    @endif
-                </nav>
-            </div>
-            <div class="col-md-4">
-                <div class="info-box-frame">
-                    <div class="info-box">
-                        <div class="mb-20">
-                            <div class="label mb-1">Country:</div>
-                            <div class="text">{{__('app.country')}}</div>
-                        </div>
-                        <div class="mb-20">
-                            <div class="label mb-1">City:</div>
-                            <div class="text">{{__('app.city')}}</div>
-                        </div>
-                        <div class="mb-20">
-                            <div class="label mb-1">Address:</div>
-                            <div class="text">{{__('app.address_line_1')}}</div>
-                        </div>
-                        <div class="mb-20">
-                            <div class="label mb-1">Email:</div>
-                            <a class="text"
-                               href="mailto:{{__('app.email')}}">
-                                {{__('app.email')}}
-                            </a>
-                        </div>
-                        <div class="mb-20">
-                            <div class="label mb-1">Phone:</div>
-                            <a class="text" href="tel:{{__('app.phone')}}">
-                                {{__('app.phone')}}
-                            </a>
+    <div class="menu">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-4">
+                    <nav id="dynamic-menu">
+                        @php
+                            $menu =  App\Models\Navigation::find(app(App\Settings\ThemeSettings::class)->header_menu_id);
+                        @endphp
+                        @if($menu)
+                            <x-menu :items="$menu->items"/>
+                        @endif
+                    </nav>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box-frame">
+                        <div class="info-box">
+                            @if(theme('site_country'))
+                                <div class="mb-20">
+                                    <div class="label mb-1">Country:</div>
+                                    <div class="text">{{theme('site_country')}}</div>
+                                </div>
+                            @endif
+                            @if(theme('site_city'))
+                                <div class="mb-20">
+                                    <div class="label mb-1">City:</div>
+                                    <div class="text">{{theme('site_city')}}</div>
+                                </div>
+                            @endif
+                            @if(theme('site_address'))
+                                <div class="mb-20">
+                                    <div class="label mb-1">Address:</div>
+                                    <div class="text">{{theme('site_address')}}</div>
+                                </div>
+                            @endif
+                            @if(theme('site_email'))
+                                <div class="mb-20">
+                                    <div class="label mb-1">Email:</div>
+                                    <a class="text" href="mailto:{{theme('site_email')}}">
+                                        {{theme('site_email')}}
+                                    </a>
+                                </div>
+                            @endif
+                            @if(theme('site_phone'))
+                                <div class="mb-20">
+                                    <div class="label mb-1">Phone:</div>
+                                    <a class="text" href="tel:{{theme('site_phone')}}">
+                                        {{theme('site_phone')}}
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </header>
 
 
