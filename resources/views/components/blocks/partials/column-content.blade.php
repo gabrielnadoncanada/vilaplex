@@ -18,7 +18,7 @@
         :heading_text="$heading_text"/>
     <x-blocks.fields.text
         :text="$text"
-        class="fo max-w-450px mx-auto"
+        class="fo max-w-650px mx-auto"
     />
     <x-blocks.fields.buttons
         :buttons="$buttons"

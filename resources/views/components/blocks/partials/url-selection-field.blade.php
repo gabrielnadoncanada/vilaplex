@@ -9,6 +9,6 @@
         @endphp
     @endif
     <x-link :href="$action['data']['url']" {{$attributes}}>
-        {{$action['data']['label']}}
+        {!! $action['data']['label'] !!}
     </x-link>
 @endif

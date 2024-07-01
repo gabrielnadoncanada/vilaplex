@@ -1,15 +1,17 @@
-<section class="mx-auto mb-[100px] text-center">
+
+<section class="mx-auto mb-100 text-center">
     <div class="container">
-        <div class="flex justify-center">
+        <div class="flex justify-content-center">
             <div class="col-lg-8">
-                <div class="grid gap-y-4">
+                <div class="d-grid row-gap-4">
                     @if($section_number)
-                        <div class="numbering fo">
+                        <div class="numbering">
                             @if($section_number)
                                 <div class="border-text">{{$section_number}}</div>
                             @endif
                             <x-blocks.fields.subtitle
-                                :subtitle="$subtitle"
+                                :subtitle_text="$subtitle_text"
+                                :subtitle_level="$subtitle_level"
                             />
                         </div>
                     @endif

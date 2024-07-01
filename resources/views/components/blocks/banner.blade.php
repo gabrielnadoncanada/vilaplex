@@ -19,7 +19,7 @@
                     />
                     <x-blocks.fields.text
                         :text="$text"
-                        class="max-w-450px mx-auto"
+                        class="max-w-650px mx-auto"
                     />
                     <x-blocks.fields.buttons
                         :buttons="$buttons"

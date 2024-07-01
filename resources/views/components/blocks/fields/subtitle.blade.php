@@ -5,6 +5,6 @@
 
 @if($subtitle_text)
     <{{$subtitle_level}} {{ $attributes->merge(['class' => 'subtitle']) }}>
-    {{ $subtitle_text }}
+    {!! $subtitle_text !!}
     </{{$subtitle_level}}>
 @endif

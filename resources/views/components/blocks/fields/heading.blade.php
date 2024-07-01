@@ -20,14 +20,14 @@
         <a href="{{$link}}">
             @endif
             @if($part1 || $part2)
-                {{$part1}}
+                {!! $part1 !!}
                 @if($part2)
                     <br>
-                    <span class="border-text">{{ $part2 }}</span>
+                    <span class="border-text">  {!! $part2 !!}</span>
                     <span class="animation-el"></span>
                 @endif
             @else
-                {{ $heading_text }}
+                {!! $heading_text!!}
             @endif
             @if($link)
         </a>

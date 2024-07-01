@@ -1,4 +1,4 @@
-<section class="about-video  mb-[100px] text-center fo col-lg-10 mx-auto">
+<section class="about-video  mb-100 text-center fo col-lg-10 mx-auto">
     <div class="video-cover-frame">
         <img class="video-cover" src="{{Storage::url($preview_image)}}" alt="banner">
         <div class="cover-overlay"></div>

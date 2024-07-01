@@ -18,7 +18,7 @@
         $categories =  $items->first()->categories()->getRelated()::whereIn('id', $category_ids)->get();
     }
 @endphp
-<section class="mt-[100px] mb-[100px]">
+<section class="mt-[100px] mb-100">
     <div class="container-fluid">
         <div class="container">
             <div class="portfolio" id="anchor">

@@ -1,10 +1,14 @@
+@props([
+    'left' => null,
+    'right' => null,
+])
 <div class="flex title-center mt-4">
     @if($left)
         <x-blocks.partials.column-content
             class="col-lg-6"
             :subtitle_text="$left['subtitle_text']"
             :subtitle_level="$left['subtitle_level']"
-            :subtitle="$left['subtitle']"
+
             :heading_text="$left['heading_text']"
             :heading_level="$left['heading_level']"
             :heading_size="$left['heading_size']"
