@@ -6,13 +6,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
-{{--    <link rel="stylesheet" href="{{asset("css/plugins/bootstrap.min.css")}}">--}}
     <link rel="stylesheet" href="{{asset("css/plugins/font-awesome.min.css")}}">
     <link rel="stylesheet" href="{{asset("css/plugins/swiper.min.css")}}">
     <link rel="stylesheet" href="{{asset("css/plugins/fancybox.min.css")}}">
     <link href="{{asset("css/plugins/mapbox-style.css")}}" rel='stylesheet'>
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    @if(theme('site_fav_icon'))
+        <link rel="icon" href="{{Storage::url(theme('site_fav_icon'))}}" sizes="32x32">
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <x-partials.meta :meta="$meta"/>
 </head>
