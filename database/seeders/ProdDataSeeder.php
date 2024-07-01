@@ -608,7 +608,7 @@ class ProdDataSeeder extends Seeder
                         [
                             'type' => 'form',
                             'data' => [
-                              
+
                             ]
                         ]
                     ]
