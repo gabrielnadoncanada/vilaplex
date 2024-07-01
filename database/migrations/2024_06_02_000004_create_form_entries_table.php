@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('email');
-            $table->string('tel');
+            $table->string('tel')->nullable();
             $table->longText('message');
         });
     }
