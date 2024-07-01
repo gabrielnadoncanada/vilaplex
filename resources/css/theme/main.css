@@ -161,13 +161,13 @@ a, a:hover {
 
 .h1 {
 	font-size: 72px;
-	line-height: 84px;
+    line-height: 1;
 	font-weight: 900;
 }
 
 .h2 {
 	font-size: 48px;
-	line-height: 66px;
+	line-height: 1;
 	font-weight: 900;
 
 }
@@ -219,7 +219,7 @@ a, a:hover {
 @media (max-width: 768px) {
 	.h1, h1 {
 		font-size: 38px;
-		line-height: 52px;
+        line-height: 1;
 	}
 	.h1 .border-text, h1 .border-text {
 		letter-spacing: -1px;
@@ -231,7 +231,7 @@ a, a:hover {
 	}
 	.h2, h2 {
 		font-size: 36px;
-		line-height: 40px;
+        line-height: 1;
 	}
 	.h2 .border-text, h2 .border-text {
 		letter-spacing: -1px;
@@ -635,15 +635,15 @@ a, a:hover {
 	transition-delay: 0.2s;
 }
 
-.menu nav {
-	opacity: 0;
-	display: flex;
-	align-items: center;
-	height: 100vh;
-	transform: translateX(100%) scale(0.8);
-	transition: 0.6s ease-in-out;
-	transition-delay: 0.1s;
-}
+/*.menu nav {*/
+/*	opacity: 0;*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*	height: 100vh;*/
+/*	transform: translateX(100%) scale(0.8);*/
+/*	transition: 0.6s ease-in-out;*/
+/*	transition-delay: 0.1s;*/
+/*}*/
 
 .menu nav ul {
 	padding: 0;
@@ -758,12 +758,12 @@ a, a:hover {
 	transition: 0.5s ease-out;
 }
 
-.menu.active nav {
-	opacity: 1;
-	transform: translateX(0) scale(1);
-	transition: 0.5s ease-out;
-	transition-delay: 0s;
-}
+/*.menu.active nav {*/
+/*	opacity: 1;*/
+/*	transform: translateX(0) scale(1);*/
+/*	transition: 0.5s ease-out;*/
+/*	transition-delay: 0s;*/
+/*}*/
 
 .menu.menu-half {
 	width: 40vw;
@@ -785,9 +785,7 @@ a, a:hover {
 /* Frame after 768px */
 
 @media (max-width: 768px) {
-	.menu {
-		padding: 0 30px;
-	}
+
 	.menu nav ul .menu-item a {
 		font-size: 22px;
 	}
@@ -1224,11 +1222,7 @@ html.is-animating .transition-fade .loading-curtain {
 
 /* Contact after 768 */
 
-@media (max-width: 768px) {
-	.contact-hint {
-		padding-top: 40px;
-	}
-}
+
 
 /* Quote */
 

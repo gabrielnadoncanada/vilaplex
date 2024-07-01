@@ -1,6 +1,6 @@
-<div class="d-flex title-center mt-4">
+<div class="flex text-center w-full mt-4">
     <x-blocks.partials.column-content
-        class="col-lg-12"
+        class="w-full"
         :subtitle_text="$subtitle_text"
         :subtitle_level="$subtitle_level"
         :heading_text="$heading_text"

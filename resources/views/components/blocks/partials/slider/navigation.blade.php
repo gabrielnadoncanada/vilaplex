@@ -9,8 +9,15 @@
 
     <div class="slider-arrows">
         <div class="label">Navigation</div>
-        <div class="button-prev magnetic-link"><span class="magnetic-object"><i class="fas fa-arrow-left"></i></span></div>
-        <div class="button-next magnetic-link"><span class="magnetic-object"><i class="fas fa-arrow-right"></i></span></div>
+        <div class="button-prev magnetic-link h-[100px]">
+            <span class="magnetic-object">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+        </div>
+        <div class="button-next magnetic-link h-[100px]">
+            <span class="magnetic-object"><i class="fas fa-arrow-right"></i>
+            </span>
+        </div>
     </div>
 </div>
 

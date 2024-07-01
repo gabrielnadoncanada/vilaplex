@@ -8,7 +8,7 @@
                 $action['data']['url'] = $post->getPublicUrl();
         @endphp
     @endif
-    <x-link :href="$action['data']['url']" {{$attributes}}>
+    <x-button :href="$action['data']['url']" :newTab="$action['data']['target'] === '_blank'" {{$attributes}}>
         {!! $action['data']['label'] !!}
-    </x-link>
+    </x-button>
 @endif

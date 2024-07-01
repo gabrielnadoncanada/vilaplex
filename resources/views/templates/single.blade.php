@@ -1,4 +1,4 @@
-<x-layouts.main>
+<x-layouts.main :meta="$record->meta">
     @if(!empty($record->content['header_section']))
         <x-render-blocks :blocks="$record->content['header_section']"/>
     @endif

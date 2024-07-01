@@ -21,28 +21,25 @@
                             </div>
                             <div class="main-title-frame">
                                 <div class="container">
-                                    <div class="main-title d-grid row-gap-3" data-swiper-parallax-x="30%"
+                                    <div class="main-title grid grid-cols-1 gap-y-5" data-swiper-parallax-x="30%"
                                          data-swiper-parallax-scale=".7" data-swiper-parallax-opacity="0"
                                          data-swiper-parallax-duration="1000">
-                                        <x-blocks.fields.subtitle
-                                            :subtitle_text="$slide['subtitle_text']"
-                                            :subtitle_level="$slide['subtitle_level']"
-                                        />
+                                        <x-text :as="$slide['subtitle_level']" theme="subtitle">
+                                            {{$slide['subtitle_text']}}
+                                        </x-text>
                                         <x-blocks.fields.heading
+                                            class="slider-main-title"
                                             :heading_level="$slide['heading_level']"
                                             :heading_size="$slide['heading_size']"
                                             :heading_text="$slide['heading_text']"
                                             :split="true"
                                         />
-                                        <x-blocks.fields.text
-                                            :text="$slide['text']"
-                                            class="max-w-350px"
-                                        />
-
+                                        <x-text as="div" class="max-w-350px mb-[10px]">
+                                            {!! $slide['text'] !!}
+                                        </x-text>
                                         <x-blocks.fields.buttons
                                             :buttons="$slide['buttons']"
                                         />
-
                                     </div>
                                 </div>
                             </div>

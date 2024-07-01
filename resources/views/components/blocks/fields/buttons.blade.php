@@ -3,10 +3,20 @@
 @if(!empty($buttons))
     <div {{ $attributes }}>
         @foreach($buttons as $button)
-            <x-blocks.partials.button
-                :action="$button['action']"
-                :style="$button['style']"
-            />
+
+            @if($button['action']['type'])
+                @if($button['action']['type'] !== 'External')
+                    @php
+                        $post = app($button['action']['type'])->find($button['action']['data']['url']);
+                        if($post)
+                            $button['action']['data']['url'] = $post->getPublicUrl();
+                    @endphp
+                @endif
+                <x-button :theme="$button['style']" :href="$button['action']['data']['url']" :newTab="$button['action']['data']['target'] === '_blank'" {{$attributes}}>
+                    {!! $button['action']['data']['label'] !!}
+                </x-button>
+            @endif
+
         @endforeach
     </div>
 @endif

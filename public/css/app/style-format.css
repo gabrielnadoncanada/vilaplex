@@ -17,16 +17,6 @@
     padding-left: 40px;
 }
 
-.subtitle:before {
-    content: '';
-    width: 30px;
-    height: 3px;
-    background-color: var(--primary);
-    border-radius: 3px;
-    position: absolute;
-    left: 0;
-    top: calc(50% - 4px);
-}
 
 .text-right {
     text-align: right !important;

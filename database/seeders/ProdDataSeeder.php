@@ -604,7 +604,14 @@ class ProdDataSeeder extends Seeder
                         ]
                     ],
                     'footer_section' => [],
-                    'content_section' => null
+                    'content_section' => [
+                        [
+                            'type' => 'form',
+                            'data' => [
+                              
+                            ]
+                        ]
+                    ]
                 ]
             ],
             [

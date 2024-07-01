@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{asset("css/plugins/bootstrap.min.css")}}">
+{{--    <link rel="stylesheet" href="{{asset("css/plugins/bootstrap.min.css")}}">--}}
     <link rel="stylesheet" href="{{asset("css/plugins/font-awesome.min.css")}}">
     <link rel="stylesheet" href="{{asset("css/plugins/swiper.min.css")}}">
     <link rel="stylesheet" href="{{asset("css/plugins/fancybox.min.css")}}">
@@ -14,9 +14,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    {{ $meta ?? '' }}
-
+    <x-partials.meta :meta="$meta"/>
 </head>
 <body class="{{str_replace('.','-',Route::getCurrentRoute()->getName())}}">
 @if (session('status'))

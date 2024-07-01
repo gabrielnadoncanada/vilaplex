@@ -1,8 +1,7 @@
 <footer class="footer">
     <div class="footer-copy">
-        <div class="container-fluid">
             <div class="container">
-                <div class="flex justify-content-between">
+                <div class="flex justify-between">
                     <div>{{config('app.name')}} © {{date('Y')}}</div>
                     {{--            <ul class="social">--}}
                     {{--                <li><a href="#."><i class="fab fa-facebook-f"></i></a></li>--}}
@@ -14,7 +13,6 @@
                                  target="_blank">Devlense</a></div>
                 </div>
             </div>
-        </div>
     </div>
 </footer>
 

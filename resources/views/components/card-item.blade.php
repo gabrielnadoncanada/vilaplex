@@ -7,7 +7,7 @@
     'link' => null,
     ])
 <div class="card-item fo">
-    <div class="card-cover-frame mb-20">
+    <div class="card-cover-frame mb-[20px]">
         @if($badge)
             <div class="badge">{{$badge}}</div>
         @endif
@@ -35,15 +35,16 @@
     @if($title || $text)
         <div class="item-descr">
             <x-blocks.fields.heading
-                class="card-title mb-10"
+                class="card-title mb-[10px]"
                 heading_level="h4"
                 heading_size="h4"
                 :heading_text="$title"
                 :link="$link"
             />
-            <x-blocks.fields.text
-                :text="$text"
-            />
+            <x-text as="div" >
+                {!! $text !!}
+            </x-text>
+
         </div>
     @endif
 </div>

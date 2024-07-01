@@ -176,6 +176,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FilamentServiceProvider::class,
         App\Providers\MigrationServiceProvider::class,
+        App\Providers\BladeThemeServiceProvider::class,
+
     ])->toArray(),
 
     /*

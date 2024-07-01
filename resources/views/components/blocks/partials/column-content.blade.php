@@ -8,18 +8,17 @@
     'heading_text' => null,
 ])
 <div {{$attributes}}>
-    <x-blocks.fields.subtitle
-        :subtitle_text="$subtitle_text"
-        :subtitle_level="$subtitle_level"
-    />
+    <x-text :as="$subtitle_level" theme="subtitle.center">
+        {{$subtitle_text}}
+    </x-text>
     <x-blocks.fields.heading
         :heading_level="$heading_level"
         :heading_size="$heading_size"
         :heading_text="$heading_text"/>
-    <x-blocks.fields.text
-        :text="$text"
-        class="fo max-w-650px mx-auto"
-    />
+    <x-text as="div" class="max-w-[650px] mx-auto mb-[10px]">
+        {!! $text !!}
+    </x-text>
+
     <x-blocks.fields.buttons
         :buttons="$buttons"
     />
