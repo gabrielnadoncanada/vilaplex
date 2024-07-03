@@ -36,7 +36,6 @@
 @livewireScripts
 <script src="{{asset("js/plugins/jquery.min.js")}}"></script>
 <script src="{{asset("js/plugins/scroll-magic.js")}}"></script>
-<script src="{{asset("js/plugins/scroll-magic-gsap-plugin.js")}}"></script>
 <script src="{{asset("js/plugins/swiper.min.js")}}"></script>
 <script src="{{asset("js/plugins/isotope.min.js")}}"></script>
 <script src="{{asset("js/plugins/fancybox.min.js")}}"></script>
