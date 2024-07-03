@@ -35,6 +35,11 @@ class ThemeSettings extends Settings
     public ?string $site_email;
 
     public ?string $site_phone;
+    public ?string $facebook_url;
+    public ?string $instagram_url;
+    public ?string $footer_text;
+
+
 
     public static function group(): string
     {

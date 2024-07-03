@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="is-animating">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="is-animating overflow-x-hidden h-full">
 <head>
     <meta charset="utf-8">
     <meta name="application-name" content="{{ config('app.name') }}">
@@ -16,16 +16,16 @@
         <link rel="icon" href="{{Storage::url(theme('site_fav_icon'))}}" sizes="32x32">
     @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
     <x-partials.meta :meta="$meta"/>
 </head>
-<body class="{{str_replace('.','-',Route::getCurrentRoute()->getName())}}">
-@if (session('status'))
-    <x-alert :message="session('status')" theme="success"></x-alert>
-@endif
-<div class="app">
+<body class="h-full bg-highlight m-0 p-0 {{str_replace('.','-',Route::getCurrentRoute()->getName())}}">
+
+<div class="relative flex flex-col h-full">
     <x-header/>
-    <main class="transition-fade">
-        <canvas class="dots" width="835" height="1347" style="display: none;"></canvas>
+    <canvas class="dots absolute w-full h-screen opacity-60 left-0 top-0" width="835" height="1347" style="display: none;"></canvas>
+
+    <main class="transition-fade flex-1">
         {{ $slot }}
     </main>
     @if(request()->path() !== '/')
@@ -33,7 +33,7 @@
     @endif
 </div>
 
-
+@livewireScripts
 <script src="{{asset("js/plugins/jquery.min.js")}}"></script>
 <script src="{{asset("js/plugins/tween-max.min.js")}}"></script>
 <script src="{{asset("js/plugins/scroll-magic.js")}}"></script>

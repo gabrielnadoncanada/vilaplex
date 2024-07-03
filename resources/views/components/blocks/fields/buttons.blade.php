@@ -1,7 +1,7 @@
 @props(['buttons' => []])
 
 @if(!empty($buttons))
-    <div {{ $attributes }}>
+    <div {{ $attributes->merge(['class' => 'flex flex-col sm:flex-row gap-y-2 items-center justify-center']) }}>
         @foreach($buttons as $button)
 
             @if($button['action']['type'])

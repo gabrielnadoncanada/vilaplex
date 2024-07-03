@@ -8,9 +8,26 @@ module.exports = {
         './config/blade-components.php',
     ],
     theme: {
+
         extend: {
+            fontFamily: {
+                sans: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            },
+            colors: {
+                'primary': '#cbb8a4',
+                'highlight': '#f7f8fa',
+                'base': '#fcfdff',
+                'main': '#424242',
+                'foreground': '#010d0d',
+                'foreground-dark': '#0d0d0d',
+            },
             maxWidth: {
                 'wide': '1200px',
+            },
+            transitionDuration: {
+                '400': '400ms',
+                '600': '600ms',
+
             },
             container: {
                 center: true,
@@ -37,5 +54,5 @@ module.exports = {
             require('@tailwindcss/forms'),
             require('@tailwindcss/typography'),
         ],
-    }
+    },
 };

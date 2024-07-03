@@ -14,9 +14,9 @@ class Buttons
             ->schema([
                 ToggleButtons::make('style')
                     ->options([
-                        'primary' => 'Primary',
+                        'default' => 'Default',
                         'outline' => 'Outline',
-                    ])->inline()->default('primary'),
+                    ])->inline()->default('default'),
                 UrlSelectionField::make('action')
                     ->columnSpanFull(),
             ])

@@ -7,6 +7,7 @@ use App\Filament\Fields\PageSelect;
 use App\Settings\ThemeSettings;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
@@ -58,6 +59,12 @@ class ManageTheme extends SettingsPage
             FileUpload::make('site_logo')
                 ->image()
                 ->label('Site logo'),
+            TextInput::make('instagram_url')
+                ->url(),
+            TextInput::make('facebook_url')
+                ->url(),
+            TextArea::make('footer_text')
+                ->label('Footer Text'),
         ];
     }
 

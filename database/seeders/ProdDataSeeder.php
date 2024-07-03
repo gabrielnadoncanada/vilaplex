@@ -333,7 +333,7 @@ class ProdDataSeeder extends Seeder
                             'image' => $this->createDefaultImage(),
                             'buttons' => [
                                 [
-                                    'style' => 'primary',
+                                    'style' => 'default',
                                     'action' => [
                                         'type' => 'App\\Models\\Page',
                                         'data' => [
@@ -355,7 +355,7 @@ class ProdDataSeeder extends Seeder
                             'image' => $this->createDefaultImage(),
                             'buttons' => [
                                 [
-                                    'style' => 'primary',
+                                    'style' => 'default',
                                     'action' => [
                                         'type' => 'App\\Models\\Service\\Post',
                                         'data' => [
@@ -388,7 +388,7 @@ class ProdDataSeeder extends Seeder
                             'image' => $this->createDefaultImage(),
                             'buttons' => [
                                 [
-                                    'style' => 'primary',
+                                    'style' => 'default',
                                     'action' => [
                                         'type' => 'App\\Models\\Service\\Post',
                                         'data' => [
@@ -421,7 +421,7 @@ class ProdDataSeeder extends Seeder
                             'image' => $this->createDefaultImage(),
                             'buttons' => [
                                 [
-                                    'style' => 'primary',
+                                    'style' => 'default',
                                     'action' => [
                                         'type' => 'App\\Models\\Service\\Post',
                                         'data' => [
@@ -469,7 +469,7 @@ class ProdDataSeeder extends Seeder
                     'image' => $this->createDefaultImage(),
                     'buttons' => [
                         [
-                            'style' => 'primary',
+                            'style' => 'default',
                             'action' => [
                                 'type' => 'App\\Models\\Page',
                                 'data' => [
@@ -687,7 +687,7 @@ class ProdDataSeeder extends Seeder
                                 'image' => $this->createDefaultImage(),
                                 'buttons' => [
                                     [
-                                        'style' => 'primary',
+                                        'style' => 'default',
                                         'action' => [
                                             'type' => 'App\\Models\\Page',
                                             'data' => [

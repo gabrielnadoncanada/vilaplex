@@ -5,37 +5,43 @@
         ->where('is_visible', true)
         ->where('published_at', '<=', now())
         ->with('categories')
-            ->orderBy($order_by, $order_direction)
-            ->limit($limit);
-
+        ->orderBy($order_by, $order_direction)
+        ->limit($limit);
         $items = $query->get();
-    } elseif ($type === 'static') {
+    }
+    elseif ($type === 'static') {
         $items = $items;
     }
 
     $categories = [];
     if (count($category_ids) > 0) {
-        $categories =  $items->first()->categories()->getRelated()::whereIn('id', $category_ids)->get();
+        $categories =$items->first()->categories()->getRelated()::whereIn('id',$category_ids)->get();
     }
 @endphp
-<section class="mt-[100px] mb-100">
+<section class="mb-[100px] mt-[100px]">
     <div class="container">
         <div class="portfolio" id="anchor">
             @if(!empty($categories))
-                <div class="filter mb-2.5 fo">
-                    <a href="#" data-filter="*" class="card-category default-link current">All Categories</a>
+                <div class=" mb-2.5 text-center">
+                    <a href="#" data-filter="*"
+                       class="relative inline-block no-underline text-[11px] uppercase font-semibold tracking-[2px] text-foreground-dark transition-[0.4s] ease-in-out mr-2.5 rounded-[3px] border-none default-link current"
+                    >All Categories</a
+                    >
                     @foreach($categories as $category)
-                        <a href="#" data-filter=".{{$category->slug}}"
-                           class="card-category default-link">{{$category->title}}</a>
+                        <a
+                            href="#"
+                            data-filter=".{{$category->slug}}"
+                            class="relative inline-block no-underline text-[11px] uppercase font-semibold tracking-[2px] text-foreground-dark transition-[0.4s] ease-in-out mr-2.5 rounded-[3px] border-none default-link"
+                        >{{$category->title}}</a
+                        >
                     @endforeach
                 </div>
             @endif
-            <div class="portfolio-frame">
+            <div class="relative overflow-hidden">
                 <div class="masonry-grid {{$columns == 33 ? 'grid-3-col' : ''}}">
                     <div class="grid-sizer"></div>
                     @foreach($items as $index => $item)
-                        @php
-                            $isDoubleHeight = false;
+                        @php $isDoubleHeight = false;
                         @endphp
                         <div class="masonry-grid-item">
                             <x-card-item

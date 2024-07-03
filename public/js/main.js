@@ -65,22 +65,6 @@
         }, 0);
     }
 
-    // menu
-    $('.menu-btn').on('click', function () {
-        $('.menu-btn , .menu').toggleClass('active');
-    });
-
-    $('.menu-item').on('click', function () {
-        $(this).toggleClass('active');
-        $(this).children('.sub-menu').toggleClass('active');
-    });
-
-    $(document).on('click', function (e) {
-        var el = '.menu , .menu-btn-frame , .menu-btn';
-        if (jQuery(e.target).closest(el).length) return;
-        $('.menu , .menu-btn-frame , .menu-btn').removeClass('active');
-    });
-
     $('.anima-link').on('click', function () {
         $('.menu , .menu-btn-frame , .menu-btn').removeClass('active');
         $('.menu-item a').on('click', function () {
@@ -94,98 +78,7 @@
     const target = document.querySelector(".magnetic-link");
     const text = document.querySelector(".magnetic-object");
 
-    class Cursor {
-        constructor(el, target, text) {
-            this.el = el;
-            this.bind();
-        }
 
-        bind() {
-            document.addEventListener("mousemove", this.move.bind(this), false);
-        }
-
-        move(e) {
-            const cursorPosition = {
-                left: e.clientX,
-                top: e.clientY
-            };
-
-            document.querySelectorAll(".magnetic-link").forEach(single => {
-                const triggerDistance = single.getBoundingClientRect().width / 2;
-
-                const targetPosition = {
-                    left: single.getBoundingClientRect().left +
-                        single.getBoundingClientRect().width / 2,
-                    top: single.getBoundingClientRect().top +
-                        single.getBoundingClientRect().height / 2
-                };
-
-                const distance = {
-                    x: targetPosition.left - cursorPosition.left,
-                    y: targetPosition.top - cursorPosition.top
-                };
-
-                const angle = Math.atan2(distance.x, distance.y);
-                const hypotenuse = Math.sqrt(
-                    distance.x * distance.x + distance.y * distance.y);
-
-                if (hypotenuse < triggerDistance) {
-                    TweenMax.to(single.querySelector(".magnetic-object"), 0.4, {
-                        x: -(Math.sin(angle) * hypotenuse / 2),
-                        y: -(Math.cos(angle) * hypotenuse / 2),
-                    });
-                } else {
-                    TweenMax.to(this.el, .6, {
-                        left: cursorPosition.left - 20,
-                        top: cursorPosition.top - 20,
-                    });
-
-                    TweenMax.to(single.querySelector(".magnetic-object"), 0.4, {
-                        x: 0,
-                        y: 0
-                    });
-                }
-            });
-        }
-    }
-
-    $(".default-link").mouseenter(function (e) {
-        TweenMax.to(element, 0.3, {
-            scale: .6,
-        });
-        TweenMax.to(element, 0.3, {
-            opacity: '1'
-        });
-    });
-
-    $(".default-link").mouseleave(function (e) {
-        TweenMax.to(element, 0.3, {
-            scale: 1
-        });
-        TweenMax.to(element, 0.3, {
-            opacity: '.5'
-        });
-    });
-
-    $(".magnetic-link").mouseenter(function (e) {
-        TweenMax.to(element, 0.3, {
-            scale: 1.4,
-        });
-        TweenMax.to(element, 0.3, {
-            opacity: '1'
-        });
-    });
-
-    $(".magnetic-link").mouseleave(function (e) {
-        TweenMax.to(element, 0.3, {
-            scale: 1
-        });
-        TweenMax.to(element, 0.3, {
-            opacity: '.5'
-        });
-    });
-
-    const cursor = new Cursor(element, target);
 
     // sliders
     var progressbar = $(".slider-progress-bar");
@@ -399,24 +292,6 @@
             }, timeout);
 
         });
-
-        // Scrollbar.use(OverscrollPlugin);
-        // var scrollbar = Scrollbar.init(document.querySelector('#scroll'), {
-        //     damping: 0.07,
-        //     renderByPixel: true,
-        //     continuousScrolling: true,
-        //     plugins: {
-        //         overscroll: {
-        //             effect: 'bounce',
-        //             damping: 0.15,
-        //             maxOverscroll: 80
-        //         },
-        //         mobile: {
-        //             speed: 0.2,
-        //             alwaysShowTracks: false
-        //         }
-        //     },
-        // });
 
         $('.scroll-hint').on('click', function () {
             scrollbar.scrollTo(0, 550, 1800);

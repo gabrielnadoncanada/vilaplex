@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="is-animating">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="is-animating overflow-x-hidden">
 <head>
     <meta charset="utf-8">
     <meta name="application-name" content="{{ config('app.name') }}">
@@ -18,7 +18,7 @@
     {{ $meta ?? '' }}
 
 </head>
-<body class="{{Route::getCurrentRoute()->getName()}}">
+<body class="bg-highlight text-base font-light m-0 p-0 {{Route::getCurrentRoute()->getName()}}">
 <div class="app">
     {{ $slot }}
 </div>

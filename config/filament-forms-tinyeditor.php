@@ -110,7 +110,7 @@ return [
 							<h1 class="mb-20 fo h1">Do you have any questions?
                                 <br>
                                 <span class="border-text">Write us a message.</span>
-                                <span class="animation-el"></span>
+
 							</h1>
 							<div class="text fo">
                                 Lorem ipsum dolor sit amet, consectetur. <br>
