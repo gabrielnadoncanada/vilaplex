@@ -27,7 +27,7 @@
     "src": "resources/css/theme/style-formats.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app.js",
+    "file": "assets/app2.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

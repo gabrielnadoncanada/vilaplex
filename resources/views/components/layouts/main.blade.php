@@ -35,7 +35,6 @@
 
 @livewireScripts
 <script src="{{asset("js/plugins/jquery.min.js")}}"></script>
-<script src="{{asset("js/plugins/tween-max.min.js")}}"></script>
 <script src="{{asset("js/plugins/scroll-magic.js")}}"></script>
 <script src="{{asset("js/plugins/scroll-magic-gsap-plugin.js")}}"></script>
 <script src="{{asset("js/plugins/swiper.min.js")}}"></script>
