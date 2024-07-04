@@ -1,4 +1,6 @@
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 window.Components = {};
 
@@ -6,10 +8,10 @@ window.Components.cursor = function cursor(options) {
     return {
         cursorPosition: {
             left: 0,
-            top: 0
+            top: 0,
         },
         init() {
-            document.addEventListener("mousemove", this.move.bind(this), false);
+            document.addEventListener('mousemove', this.move.bind(this), false);
             document.querySelectorAll('.default-link').forEach(link => {
                 link.addEventListener('mouseenter', this.defaultLinkMouseEnter.bind(this));
                 link.addEventListener('mouseleave', this.defaultLinkMouseLeave.bind(this));
@@ -24,28 +26,28 @@ window.Components.cursor = function cursor(options) {
             this.cursorPosition.left = e.clientX;
             this.cursorPosition.top = e.clientY;
 
-            document.querySelectorAll(".magnetic-link").forEach(single => {
+            document.querySelectorAll('.magnetic-link').forEach(single => {
                 const triggerDistance = single.getBoundingClientRect().width / 2;
 
                 const targetPosition = {
                     left: single.getBoundingClientRect().left +
                         single.getBoundingClientRect().width / 2,
                     top: single.getBoundingClientRect().top +
-                        single.getBoundingClientRect().height / 2
+                        single.getBoundingClientRect().height / 2,
                 };
 
                 const distance = {
                     x: targetPosition.left - this.cursorPosition.left,
-                    y: targetPosition.top - this.cursorPosition.top
+                    y: targetPosition.top - this.cursorPosition.top,
                 };
 
                 const angle = Math.atan2(distance.x, distance.y);
                 const hypotenuse = Math.sqrt(
-                    distance.x * distance.x + distance.y * distance.y
+                    distance.x * distance.x + distance.y * distance.y,
                 );
 
                 if (hypotenuse < triggerDistance) {
-                    gsap.to(single.querySelector(".magnetic-object"), {
+                    gsap.to(single.querySelector('.magnetic-object'), {
                         duration: 0.4,
                         x: -(Math.sin(angle) * hypotenuse / 2),
                         y: -(Math.cos(angle) * hypotenuse / 2),
@@ -57,10 +59,10 @@ window.Components.cursor = function cursor(options) {
                         top: this.cursorPosition.top - 20,
                     });
 
-                    gsap.to(single.querySelector(".magnetic-object"), {
+                    gsap.to(single.querySelector('.magnetic-object'), {
                         duration: 0.4,
                         x: 0,
-                        y: 0
+                        y: 0,
                     });
                 }
             });
@@ -80,6 +82,52 @@ window.Components.cursor = function cursor(options) {
         magneticLinkMouseLeave() {
             gsap.to(this.$el, { duration: 0.3, scale: 1 });
             gsap.to(this.$el, { duration: 0.3, opacity: 0.5 });
-        }
-    }
+        },
+    };
+};
+
+window.Components.swiper = function swiper(options = {}) {
+    return {
+        init() {
+            const defaultOptions = {
+                container: '.swiper-container',
+                autoplay: {
+                    delay: 10000,
+                    disableOnInteraction: false,
+                },
+                loop: true,
+                parallax: true,
+                mousewheel: false,
+                keyboard: false,
+                speed: 1200,
+                navigation: {
+                    nextEl: this.$refs.next,
+                    prevEl: this.$refs.prev,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                on: {
+                    init: () => {
+                        this.$refs.progress.classList.remove('animate', 'active');
+                        this.$refs.progress.classList.add('animate', 'active');
+                    },
+                    slideChangeTransitionStart: () => {
+                        this.$refs.progress.classList.remove('animate', 'active');
+                        this.$refs.progress.classList.add('active');
+                    },
+                    slideChangeTransitionEnd: () => {
+                        this.$refs.progress.classList.add('animate');
+                    },
+                },
+            };
+            options = { ...defaultOptions, ...options };
+
+            setTimeout(() => {
+                new Swiper(options.container, options);
+            }, 1000);
+
+        },
+    };
 };

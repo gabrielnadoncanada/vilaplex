@@ -19,15 +19,6 @@ a:hover {
     @apply text-inherit no-underline;
 }
 
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-    font-family: "Glacial Indifference", sans-serif;
-}
-
 /* After 992px */
 @media (max-width: 992px) {
     .text-right .subtitle {
@@ -59,11 +50,11 @@ a:hover {
 }
 
 
-*,
-*:after,
-*:before {
-    @apply box-border;
-}
+/**,*/
+/**:after,*/
+/**:before {*/
+/*    @apply box-border;*/
+/*}*/
 
 *:focus {
     outline: inherit;
@@ -171,18 +162,19 @@ blockquote:after {
 }
 
 .sub-menu a {
-    @apply duration-300 ease-in-out hover:text-main uppercase text-[11px] font-semibold tracking-[2px] leading-[15px] text-main;
+    @apply duration-300 ease-in-out hover:text-main uppercase text-[11px] font-semibold tracking-[2px]  text-main;
 }
 
-.sub-menu > :first-child {
-    @apply mt-2.5 pt-2.5;
+.sub-menu > :first-child > a {
+    @apply pt-2.5;
 }
 
-.menu-item-has-children {
-    @apply relative cursor-pointer after:text-main after:font-black after:content-["\f078"] after:absolute after:duration-300 after:ease-in-out after:right-0 after:top-[25px];
+.menu-item-has-children > a {
+    @apply flex items-center justify-between after:font-black after:content-["\f078"] after:text-main after:text-[1rem];
+    /*@apply relative cursor-pointer after:text-main after:font-black after:content-["\f078"] after:absolute after:duration-300 after:ease-in-out after:right-0 after:top-[25px];*/
 }
 
-.menu-item-has-children:after {
+.menu-item-has-children > a:after {
     font-family: "Font Awesome 5 Free";
 }
 
@@ -227,6 +219,7 @@ html.is-rendering body .ball svg path {
 }
 
 .transition-fade .loading-curtain {
+
     @apply -translate-x-full duration-1000;
 }
 
@@ -241,15 +234,6 @@ html.is-animating .transition-fade .loading-curtain {
 .curtain,
 .loading-curtain {
     @apply absolute w-full h-full bg-[#f7f8fa] z-[1] left-0 top-0;
-}
-
-@keyframes loading {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 
@@ -365,4 +349,8 @@ html.is-animating .transition-fade .loading-curtain {
 
 main > section:first-child {
     @apply pt-[140px];
+}
+
+.swiper-container {
+    overflow: hidden;
 }

@@ -1,4 +1,10 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+
+
 /** @type {import('tailwindcss').Config} */
+
+
 module.exports = {
     content: [
         './resources/**/*.blade.php',
@@ -11,7 +17,8 @@ module.exports = {
 
         extend: {
             fontFamily: {
-                sans: ['-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                sans: ['Glacial Indifference', ...defaultTheme.fontFamily.sans],
+
             },
             colors: {
                 'primary': '#cbb8a4',
@@ -50,9 +57,6 @@ module.exports = {
             '2xl': '1200px',
             '3xl': '1400px',
         },
-        plugins: [
-            require('@tailwindcss/forms'),
-            require('@tailwindcss/typography'),
-        ],
+        plugins: [forms],
     },
 };

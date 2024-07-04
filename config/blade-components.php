@@ -107,5 +107,19 @@ return [
                 ],
             ],
         ],
+        'menu' => [
+            'class' => Components\Menu::class,
+            'themes' => [
+                'default' => 'w-full m-0 p-0 ',
+                'submenu' => 'w-full m-0 p-0 sub-menu max-h-0 overflow-hidden duration-300 ease-in-out pl-5',
+            ],
+        ],
+        'menu-item' => [
+            'class' => Components\MenuItem::class,
+            'themes' => [
+                'default' => 'duration-300 ease-in-out hover:text-main uppercase text-[34px]  font-semibold tracking-[2px] leading-[15px] text-main list-none py-2.5 last:mb-0 ',
+                'submenu' => 'duration-300 ease-in-out hover:text-main uppercase text-[11px] font-semibold tracking-[2px] leading-[15px] text-main list-none py-2.5 last:mb-0 ',
+            ],
+        ],
     ],
 ];

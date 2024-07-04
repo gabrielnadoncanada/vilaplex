@@ -19,7 +19,7 @@ class ProdDataSeeder extends Seeder
     {
         $this->seedUsers();
         $this->seedService();
-//        $this->seedBlog();
+        $this->seedBlog();
         $this->seedPage();
         $this->seedMenu();
     }

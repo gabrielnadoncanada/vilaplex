@@ -1,8 +1,10 @@
-<div class="{{"slider-template-$template"}}">
+<div
+    x-data="Components.swiper()"
+    class="{{"slider-template-$template"}}">
     @if($template != 'full-screen')
         <x-blocks.partials.slider.navigation class="pb-10" />
     @endif
-    <div class="swiper-container ">
+    <div class="swiper-container" >
         <div class="swiper-wrapper">
             @foreach ($slides as $slide)
                 <div class="swiper-slide">
@@ -21,9 +23,12 @@
                             </div>
                             <div class="main-title-frame">
                                 <div class="container">
-                                    <div class="main-title grid grid-cols-1 gap-y-5" data-swiper-parallax-x="30%"
-                                         data-swiper-parallax-scale=".7" data-swiper-parallax-opacity="0"
-                                         data-swiper-parallax-duration="1000">
+                                    <div class="main-title grid grid-cols-1 gap-y-5"
+                                         data-swiper-parallax-x="30%"
+                                         data-swiper-parallax-scale=".7"
+                                         data-swiper-parallax-opacity="0"
+                                         data-swiper-parallax-duration="1000"
+                                    >
                                         <x-text :as="$slide['subtitle_level']" theme="subtitle">
                                             {{$slide['subtitle_text']}}
                                         </x-text>

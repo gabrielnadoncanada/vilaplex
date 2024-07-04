@@ -26,7 +26,14 @@
     "isEntry": true,
     "src": "resources/css/theme/style-formats.css"
   },
+  "resources/js/app.css": {
+    "file": "assets/app2.css",
+    "src": "resources/js/app.css"
+  },
   "resources/js/app.js": {
+    "css": [
+      "assets/app2.css"
+    ],
     "file": "assets/app2.js",
     "isEntry": true,
     "src": "resources/js/app.js"

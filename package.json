@@ -23,6 +23,7 @@
         "cropperjs": "^1.6.2",
         "gridstack": "^10.2.0",
         "gsap": "^3.12.5",
-        "sortablejs": "^1.15.2"
+        "sortablejs": "^1.15.2",
+        "swiper": "^11.1.4"
     }
 }
