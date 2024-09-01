@@ -9,6 +9,7 @@
     :heading_text="$left['heading_text']"
     :heading_level="$left['heading_level']"
     :heading_size="$left['heading_size']"
+    :image="$left['image']"
     :buttons="$left['buttons']"
   />
   @endif @if($right)
@@ -18,6 +19,7 @@
     :heading_text="$right['heading_text']"
     :heading_level="$right['heading_level']"
     :heading_size="$right['heading_size']"
+    :image="$right['image']"
     :buttons="$right['buttons']"
   />
   @endif

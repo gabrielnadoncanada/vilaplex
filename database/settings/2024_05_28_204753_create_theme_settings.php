@@ -24,6 +24,7 @@ return new class extends SettingsMigration
         $this->migrator->add('theme.site_phone', '+4 9(054) 996 84 25');
         $this->migrator->add('theme.facebook_url', '');
         $this->migrator->add('theme.instagram_url', '');
+        $this->migrator->add('theme.header_aside', '');
         $this->migrator->add('theme.footer_text', 'Making the world a better place through constructing elegant hierarchies.');
     }
 };

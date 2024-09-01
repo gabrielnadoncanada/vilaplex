@@ -161,17 +161,39 @@ blockquote:after {
     @apply text-primary;
 }
 
-.sub-menu a {
+header .sub-menu {
+    @apply pl-5;
+}
+header .sub-menu li {
+    @apply leading-[24px];
+}
+
+header .sub-menu a{
     @apply duration-300 ease-in-out hover:text-main uppercase text-[11px] font-semibold tracking-[2px]  text-main;
 }
 
-.sub-menu > :first-child > a {
+header .sub-menu > :first-child > a {
     @apply pt-2.5;
 }
 
-.menu-item-has-children > a {
+header .menu-item-has-children > a {
     @apply flex items-center justify-between after:font-black after:content-["\f078"] after:text-main after:text-[1rem];
     /*@apply relative cursor-pointer after:text-main after:font-black after:content-["\f078"] after:absolute after:duration-300 after:ease-in-out after:right-0 after:top-[25px];*/
+}
+
+footer .sub-menu {
+    @apply !block;
+}
+
+footer .menu  ul {
+    @apply flex gap-x-20;
+}
+footer .menu  ul > li > a {
+    @apply !pt-0;
+}
+
+footer .sub-menu a {
+    @apply text-sm leading-6 font-normal;
 }
 
 .menu-item-has-children > a:after {

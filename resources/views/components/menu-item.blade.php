@@ -7,7 +7,7 @@
         @if(!empty($item['children']))
             @click.prevent="isOpen = !isOpen"
         @endif
-        class="text-foreground hover:text-foreground text-[34px] py-2.5  inline-block h-full font-black anima-link default-link"
+        class="text-foreground hover:text-foreground  py-2.5  inline-block  font-black anima-link default-link"
         href="{{ !empty($item['children']) ? '#' : $url }}"
     >
         {{ $item['data']['label'] }}
@@ -21,7 +21,7 @@
             x-transition:leave="transition-height ease-in-out duration-300"
             x-transition:leave-start="max-h-[300px]"
             x-transition:leave-end="max-h-0"
-            class="sub-menu overflow-hidden pl-5"
+            class="sub-menu overflow-hidden "
             :items="$item['children']"
         />
     @endif

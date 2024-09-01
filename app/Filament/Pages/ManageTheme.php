@@ -6,6 +6,7 @@ use App\Filament\Fields\MenuSelect;
 use App\Filament\Fields\PageSelect;
 use App\Settings\ThemeSettings;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -72,6 +73,7 @@ class ManageTheme extends SettingsPage
     {
         return [
             MenuSelect::make('header_menu_id'),
+            RichEditor::make('header_aside'),
         ];
     }
 

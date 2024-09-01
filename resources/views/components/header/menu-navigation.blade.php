@@ -7,7 +7,7 @@
         x-transition:leave="transition ease-in-out duration-600 delay-100"
         x-transition:leave-start="opacity-100 translate-x-0 scale-100"
         x-transition:leave-end="opacity-0 translate-x-[100%] scale-80"
-        class="flex items-center h-screen"
+        class="flex items-center h-screen text-[34px]"
     >
         @php
             $menu =  App\Models\Navigation::find(app(App\Settings\ThemeSettings::class)->header_menu_id);

@@ -1,10 +1,20 @@
 @import "./theme/fonts.css";
 @import "./theme/main.css";
 @import "./theme/style-formats.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 p {
     line-height: 1.375;
+}
+
+
+#menu-info p strong {
+    @apply text-main text-[10px]/[15px] md:text-[11px]/[15px] font-bold pt-[3px] tracking-[2px] uppercase mb-1 block;
+}
+
+#menu-info p {
+    @apply text-main text-[16px]/[20px] md:text-base/[22px];
 }
