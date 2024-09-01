@@ -111,9 +111,12 @@ class Grid
                                     if (! empty($get('dynamic_type'))) {
                                         $firstItem = app($get('dynamic_type'))->all()->first();
 
-                                        if (method_exists($firstItem, 'categories')) {
-                                            return $firstItem->categories()->getRelated()->all()->pluck('title', 'id')->toArray();
+                                        if($firstItem){
+                                            if (method_exists($firstItem, 'categories')) {
+                                                return $firstItem->categories()->getRelated()->all()->pluck('title', 'id')->toArray();
+                                            }
                                         }
+
                                     }
 
                                     return [];
