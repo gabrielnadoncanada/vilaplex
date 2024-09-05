@@ -16,7 +16,6 @@
                     {!! $button['action']['data']['label'] !!}
                 </x-button>
             @endif
-
         @endforeach
     </div>
 @endif
