@@ -1,6 +1,6 @@
 @props([ 'left' => null, 'right' => null, ])
 <div
-  class="mt-4 grid w-full justify-between gap-x-6 gap-y-5 text-center md:grid-cols-2"
+  class="mt-4 grid w-full justify-between gap-x-6 gap-y-8 text-center md:grid-cols-2"
 >
   @if($left)
   <x-blocks.partials.column-content
