@@ -3,7 +3,6 @@
     x-bind:class="{ 'after:rotate-180': isOpen }"
     class="group list-none last:mb-0 {{ !empty($item['children']) ? 'menu-item-has-children' : '' }}"
 >
-    @dump($url)
     <a
         @if(!empty($item['children']))
             @click.prevent="isOpen = !isOpen"
